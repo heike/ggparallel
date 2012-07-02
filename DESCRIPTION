@@ -1,0 +1,17 @@
+Package: gghammock
+Type: Package
+Title: Parroting Function
+Version: 1.0
+Date: 2012-07-02
+Author: Heike Hofmann, Marie Vendettuoli
+Maintainer: Heike Hofmann <hofmann@iastate.edu>
+Description: R package for creating hammock plots and parallel sets plots using
+    the ggplot2 framework.
+License: MIT
+Depends:
+    ggplot2,
+    reshape2,
+    plyr
+Collate:
+    'help.R'
+    'hammock.R'
