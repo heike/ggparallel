@@ -2,8 +2,9 @@
 \alias{gghammock}
 \title{Creating hammock plots and parallel sets}
 \usage{
-  returns a ggplot2 object that can be plotted directly or
-    used as base layer for additional modifications.
+  gghammock(vars = list(), data, weight = NULL,
+    alpha = 0.5, width = 0.25, order = 1, color = NA,
+    label = TRUE, angle = 90, text.offset = NULL, ...)
 }
 \arguments{
   \item{vars}{list of variable names to be included in the
@@ -38,6 +39,10 @@
 
   \item{...}{passed on directly to all of the ggplot2
   commands}
+}
+\value{
+  returns a ggplot2 object that can be plotted directly or
+  used as base layer for additional modifications.
 }
 \description{
   quick description

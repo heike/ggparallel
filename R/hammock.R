@@ -16,7 +16,7 @@
 #' @param angle by which text for labelling is rotated. Ignored if label = FALSE
 #' @param text.offset (vector) of values for offset the labels
 #' @param ... passed on directly to all of the ggplot2 commands
-#' @usage returns a  ggplot2 object that can be plotted directly or used as base layer for additional modifications.
+#' @return returns a  ggplot2 object that can be plotted directly or used as base layer for additional modifications.
 #' @export
 #' @examples
 #' data(mtcars)
@@ -63,9 +63,7 @@ gghammock <- function(vars=list(), data, weight=NULL, alpha=0.5, width = 0.25, o
                              )
   }
   
-#browser()  
-  for (i in 1:length(vars)) {
-  	
+  for (i in 1:length(vars)) { 	
   	levels(data[,vars[[i]]]) <- paste(vars[[i]], levels(data[,vars[[i]]]), sep=":")
   }
   
@@ -79,27 +77,20 @@ gghammock <- function(vars=list(), data, weight=NULL, alpha=0.5, width = 0.25, o
     yname <- y
     
     ## create the data table, x, y, and weight
-    ## correction: order the table by x, y according to gghammocks ordering
-    ##	dfxy <- as.data.frame(xtabs(data$weight~data[,y] + data[,x]))
     dfxy <- as.data.frame(xtabs(data$weight~data[,x] + data[,y]))
     dfxy <- subset(dfxy, Freq > 0)
      
-    #names(dfxy)[1:2] <- c(yname, xname)
-    ## correction: maintain x, y order as for variable entry
     names(dfxy)[1:2] <- c(xname, yname)
     
     ## get the ordering for data according to x-axis categories
-    ## correction: order in the same direction as x, y axis
-    ## idx <- order(dfxy[,y], dfxy[,x], decreasing = TRUE)
     idx <- order(dfxy[,x], dfxy[,y], decreasing = FALSE)
     
     ## find the position of X-axis connector
     dfxy$X[idx] <- cumsum(dfxy$Freq[idx])    
     
     ## get the ordering for data according to y-axis categories
-    ## correction: order in the same direction as x, y axis
-    ##   idx <- order(dfxy[,x], dfxy[,y])
     idx <- order(dfxy[,y], dfxy[,x], decreasing = FALSE)
+
     ## find the position of the Y-axis connector
     dfxy$Y[idx] <- cumsum(dfxy$Freq[idx])
     
@@ -107,7 +98,7 @@ gghammock <- function(vars=list(), data, weight=NULL, alpha=0.5, width = 0.25, o
     dfxy$id <- 1:nrow(dfxy)    
     
     dfm <- melt(dfxy, measure.var=c("X", "Y"))
-    levels(dfm$variable) <- c(x,y)    
+#    levels(dfm$variable) <- c(x,y)    
     
     dfxy$XX <- dfxy[,xname]
     dfxy$YY <- dfxy[,yname]
