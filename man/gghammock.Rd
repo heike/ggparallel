@@ -61,7 +61,7 @@ gghammock(list("Class", "Sex", "Survived"), data=titanic, weight="Freq", angle=0
   coord_flip() + scale_fill_brewer(palette=6, guide="none")
 # biological examples: genes and pathways
 data(genes)
-require(RColorbrewer)
+require(RColorBrewer)
 gghammock(list("chrom", "path"), data = genes, color = "white",
   factorlevels =  c(sapply(unique(genes$chrom), as.character),
   unique(genes$path))) +
