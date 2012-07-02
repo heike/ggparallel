@@ -15,6 +15,8 @@
 #' @param label binary variable (vector), whether labels should be shown.
 #' @param angle by which text for labelling is rotated. Ignored if label = FALSE
 #' @param text.offset (vector) of values for offset the labels
+#' @param ... passed on directly to all of the ggplot2 commands
+#' @usage returns a  ggplot2 object that can be plotted directly or used as base layer for additional modifications.
 #' @export
 #' @examples
 #' data(mtcars)
@@ -24,10 +26,19 @@
 #' # change colour scheme
 #' gghammock(list("gear", "cyl"), data=mtcars, angle=0) + coord_flip() + 
 #'   scale_fill_brewer(palette="Set1")
-#' example with more than two variables:
+#' # example with more than two variables:
 #' titanic <- as.data.frame(Titanic)
 #' gghammock(list("Class", "Sex", "Survived"), data=titanic, weight="Freq", angle=0) + 
 #'   coord_flip() + scale_fill_brewer(palette=6, guide="none")
+#' # biological examples: genes and pathways
+#' data(genes)
+#' require(RColorbrewer)
+#' gghammock(list("chrom", "path"), data = genes, color = "white", 
+#'   factorlevels =  c(sapply(unique(genes$chrom), as.character), 
+#'   unique(genes$path))) + 
+#'   scale_fill_manual(values = c(rep("grey80", 24), brewer.pal("YlOrRd", n = 9)), guide="none") + 
+#'   coord_flip() 
+
 
 gghammock <- function(vars=list(), data, weight=NULL, alpha=0.5, width = 0.25, order = 1, color = NA, label = TRUE, angle=90, text.offset=NULL, ...) {
   ### error checking
