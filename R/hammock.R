@@ -8,6 +8,7 @@
 #' @param vars list of variable names to be included in the plotting. order of the variables is preserved in the display
 #' @param data data frame 
 #' @param weight weighting variable - use character string
+#' @param method plotting method to use - one of \code{parset}, \code{angle}
 #' @param alpha level of $\alpha$ blending for ribbons, value between 0 and 1, defaults to 0.5.
 #' @param width width of variables 
 #' @param order flag variable with three levels -1, 0, 1 for levels in decreasing order, levels in increasing order and levels unchanged. This variable can be either a scalar or a vector
@@ -21,6 +22,8 @@
 #' @examples
 #' data(mtcars)
 #' gghammock(list("gear", "cyl"), data=mtcars)
+#' # compare with method='parset'
+#' gghammock(list("gear", "cyl"), data=mtcars, method='parset')
 #' # flip plot and rotate text
 #' gghammock(list("gear", "cyl"), data=mtcars, angle=0) + coord_flip()
 #' # change colour scheme
@@ -40,7 +43,7 @@
 #'   coord_flip() 
 
 
-gghammock <- function(vars=list(), data, weight=NULL, alpha=0.5, width = 0.25, order = 1, color = NA, label = TRUE, angle=90, text.offset=NULL, ...) {
+gghammock <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5, width = 0.25, order = 1, color = NA, label = TRUE, angle=90, text.offset=NULL, ...) {
   ### error checking
   k = length(vars)
   if (k < 2) message("Error: gghammock needs at least two variables. Use vars=list('X', 'Y')")
@@ -109,8 +112,28 @@ gghammock <- function(vars=list(), data, weight=NULL, alpha=0.5, width = 0.25, o
     dfm$xid <- xid - 1
     dfm$yid <- yid
     
+    if (method=="parset") {
     geom_ribbon(aes(x=as.numeric(variable)+offset+xid,ymin=value -Freq, ymax= value, group=id, 
                     fill=Nodeset),	alpha=alpha, data=dfm)
+    } else {
+      if (method == "angle") {
+        dfm$x <- with(dfm, as.numeric(variable)+offset+xid)
+        dfm<- ddply(dfm, .(id), transform, 
+                            dx=max(x)-min(x),
+                            dy=max(value) -min(value)
+                            )
+        dfm$tangens = dfm$dy/dfm$dx
+        maxslope <- max(dfm$tangens)
+        dfm$newdx <- with(dfm, dy/maxslope)
+        
+        dfm2 <- dfm
+        dfm2$offset <- with(dfm, (abs(offset) + (dx-newdx)/2) * sign(offset))
+        dfm2$x <- with(dfm2, as.numeric(variable)+offset+xid)
+        dfm <- rbind(dfm, dfm2)
+        geom_ribbon(aes(x=x,ymin=value -Freq, ymax= value, group=id, 
+                        fill=Nodeset),  alpha=alpha, data=dfm)
+      }
+    }
   }
   ## end helper function
   

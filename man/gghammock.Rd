@@ -3,8 +3,9 @@
 \title{Creating hammock plots and parallel sets}
 \usage{
   gghammock(vars = list(), data, weight = NULL,
-    alpha = 0.5, width = 0.25, order = 1, color = NA,
-    label = TRUE, angle = 90, text.offset = NULL, ...)
+    method = "angle", alpha = 0.5, width = 0.25, order = 1,
+    color = NA, label = TRUE, angle = 90,
+    text.offset = NULL, ...)
 }
 \arguments{
   \item{vars}{list of variable names to be included in the
@@ -14,6 +15,9 @@
   \item{data}{data frame}
 
   \item{weight}{weighting variable - use character string}
+
+  \item{method}{plotting method to use - one of
+  \code{parset}, \code{angle}}
 
   \item{alpha}{level of $\alpha$ blending for ribbons,
   value between 0 and 1, defaults to 0.5.}
@@ -55,6 +59,8 @@
 \examples{
 data(mtcars)
 gghammock(list("gear", "cyl"), data=mtcars)
+# compare with method='parset'
+gghammock(list("gear", "cyl"), data=mtcars, method='parset')
 # flip plot and rotate text
 gghammock(list("gear", "cyl"), data=mtcars, angle=0) + coord_flip()
 # change colour scheme
