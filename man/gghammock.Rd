@@ -49,7 +49,8 @@
   used as base layer for additional modifications.
 }
 \description{
-  quick description
+  Hammock plots and parallel set plots allow visualization
+  of pairwise relationships between categorical variables.
 }
 \details{
   more detailed description: we need to reference Kosara's
@@ -76,7 +77,7 @@ require(RColorBrewer)
 gghammock(list("chrom", "path"), data = genes, color = "white",
   factorlevels =  c(sapply(unique(genes$chrom), as.character),
   unique(genes$path))) +
-  scale_fill_manual(values = c(rep("grey80", 24), brewer.pal("YlOrRd", n = 9)), guide="none") +
+  scale_fill_manual(values = c(  rep("grey80", 24), brewer.pal("YlOrRd", n = 9)), guide="none") +
   coord_flip()
 }
 

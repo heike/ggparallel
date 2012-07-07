@@ -1,6 +1,6 @@
 #' Creating hammock plots and parallel sets
 #' 
-#' quick description
+#' Hammock plots and parallel set plots allow visualization of pairwise relationships between categorical variables.
 #' 
 #' more detailed description: we need to reference Kosara's paper on parallel sets, we should also point to 
 #' Matt Schonlau's paper for the hammocks
@@ -39,7 +39,7 @@
 #' gghammock(list("chrom", "path"), data = genes, color = "white", 
 #'   factorlevels =  c(sapply(unique(genes$chrom), as.character), 
 #'   unique(genes$path))) + 
-#'   scale_fill_manual(values = c(rep("grey80", 24), brewer.pal("YlOrRd", n = 9)), guide="none") + 
+#'   scale_fill_manual(values = c(  rep("grey80", 24), brewer.pal("YlOrRd", n = 9)), guide="none") + 
 #'   coord_flip() 
 
 
@@ -66,8 +66,10 @@ gghammock <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5,
                              )
   }
   
+  llist <- NULL
   for (i in 1:length(vars)) { 	
   	levels(data[,vars[[i]]]) <- paste(vars[[i]], levels(data[,vars[[i]]]), sep=":")
+    llist <- c(llist, levels(data[,vars[[i]]]))
   }
   
   ## helper function
@@ -99,9 +101,9 @@ gghammock <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5,
     
     ## assign row number as id
     dfxy$id <- 1:nrow(dfxy)    
-    
+
     dfm <- melt(dfxy, measure.var=c("X", "Y"))
-#    levels(dfm$variable) <- c(x,y)    
+    levels(dfm$variable) <- c(x,y)    
     
     dfxy$XX <- dfxy[,xname]
     dfxy$YY <- dfxy[,yname]
@@ -142,10 +144,12 @@ gghammock <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5,
   for (i in 1:(length(vars)-1))
     gr[[i]] <- getRibbons(i,i+1)
 
-  	
-  dfm <- melt(data[,c("weight", unlist(vars))], id.var="weight")
+  subdata <- data[,c("weight", unlist(vars))]	
+  dfm <- melt(subdata, id.var="weight")
   names(dfm)[3] <- "Nodeset"
-
+#browser()
+  dfm$Nodeset <- factor(dfm$Nodeset, levels=llist)
+  
   llabels <- NULL
   if (label) {
 	  label.stats <- ddply(dfm, .(variable, Nodeset), summarize,
@@ -155,19 +159,19 @@ gghammock <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5,
 	  maxWeight <- sum(label.stats$weight)/length(unique(label.stats$variable))
 	  label.stats$ypos <- cumsum(label.stats$weight)-(as.numeric(label.stats$variable)-1)*maxWeight
 	  label.stats$ypos <- label.stats$ypos-label.stats$weight/2
-#browser()
-  	 if (is.null(text.offset)) text.offset <- 0
-  	 label.stats$text.offset <- rep(text.offset, length=nrow(label.stats))
+
+    if (is.null(text.offset)) text.offset <- 0
+  	label.stats$text.offset <- rep(text.offset, length=nrow(label.stats))
   	 
 	  varnames <- paste(unlist(vars), sep="|", collapse="|")
 	  label.stats$Nodeset <- gsub(sprintf("(%s):(.*)",varnames),"\\2", as.character(label.stats$Nodeset))
-	llabels <- list(geom_text(aes(x=as.numeric(variable)+text.offset, y=ypos, label=Nodeset),
+	  llabels <- list(geom_text(aes(x=as.numeric(variable)+text.offset, y=ypos, label=Nodeset),
 	                      colour = "grey20", data=label.stats, angle=angle, size=4), 
-	                geom_text(aes(x=as.numeric(variable)+0.01+text.offset, y=ypos-0.01, label=Nodeset),
+	                  geom_text(aes(x=as.numeric(variable)+0.01+text.offset, y=ypos-0.01, label=Nodeset),
 	                      colour = "grey90", data=label.stats, angle=angle, size=4)) 
   }
   ggplot() + geom_bar(aes(weight=weight, x=variable, fill=Nodeset), 
-                      colour = color, width=width,data=dfm) + 
+                      colour = color, width=width, data=dfm) + 
              llabels + xlab("")  + gr 
 }
 
