@@ -131,7 +131,13 @@ gghammock <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5,
         dfm2 <- dfm
         dfm2$offset <- with(dfm, (abs(offset) + (dx-newdx)/2) * sign(offset))
         dfm2$x <- with(dfm2, as.numeric(variable)+offset+xid)
-        dfm <- rbind(dfm, dfm2)
+        dfm3 <- ddply(dfm2, names(dfm2)[1], transform, 
+                      dx2 = min(x[which(tangens==max(tangens))])
+                      )
+        dfm3 <- ddply(dfm3, .(id), transform, shiftx = min(x)-dx2)
+        dfm3$x <- dfm3$x - dfm3$shiftx
+        browser()
+        dfm <- rbind(dfm, dfm3[,-(16:17)])
         geom_ribbon(aes(x=x,ymin=value -Freq, ymax= value, group=id, 
                         fill=Nodeset),  alpha=alpha, data=dfm)
       }
