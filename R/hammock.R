@@ -31,12 +31,17 @@
 #'   scale_fill_brewer(palette="Set1")
 #' # example with more than two variables:
 #' titanic <- as.data.frame(Titanic)
-#' gghammock(list("Class", "Sex", "Survived"), data=titanic, weight="Freq", angle=0) + 
+#' gghammock(list("Sex", "Class", "Survived"), data=titanic, weight="Freq", angle=0, order=c(1,1,-1)) + 
 #'   coord_flip() + scale_fill_brewer(palette=6, guide="none")
 #' # biological examples: genes and pathways
 #' data(genes)
 #' require(RColorBrewer)
 #' gghammock(list("chrom", "path"), data = genes, color = "white", 
+#'   factorlevels =  c(sapply(unique(genes$chrom), as.character), 
+#'   unique(genes$path))) + 
+#'   scale_fill_manual(values = c(  rep("grey80", 24), brewer.pal("YlOrRd", n = 9)), guide="none") + 
+#'   coord_flip() 
+#' gghammock(list("chrom", "path"), data = genes, color = "white", order=c(-1,1),
 #'   factorlevels =  c(sapply(unique(genes$chrom), as.character), 
 #'   unique(genes$path))) + 
 #'   scale_fill_manual(values = c(  rep("grey80", 24), brewer.pal("YlOrRd", n = 9)), guide="none") + 
@@ -108,15 +113,15 @@ gghammock <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5,
     dfxy$XX <- dfxy[,xname]
     dfxy$YY <- dfxy[,yname]
     
-    dfm$Nodeset <- dfm[,yname]    
+    dfm$Nodeset <- dfm[,xname]    
     
     dfm$offset <- c(width/2,-width/2)[as.numeric(dfm$variable)]
     dfm$xid <- xid - 1
     dfm$yid <- yid
     
     if (method=="parset") {
-    geom_ribbon(aes(x=as.numeric(variable)+offset+xid,ymin=value -Freq, ymax= value, group=id, 
-                    fill=Nodeset),	alpha=alpha, data=dfm)
+      geom_ribbon(aes(x=as.numeric(variable)+offset+xid,ymin=value -Freq, ymax= value, group=id, 
+                      fill=Nodeset),	alpha=alpha, data=dfm)
     } else {
       if (method == "angle") {
         dfm$x <- with(dfm, as.numeric(variable)+offset+xid)
@@ -131,15 +136,15 @@ gghammock <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5,
         dfm2 <- dfm
         dfm2$offset <- with(dfm, (abs(offset) + (dx-newdx)/2) * sign(offset))
         dfm2$x <- with(dfm2, as.numeric(variable)+offset+xid)
-        dfm3 <- ddply(dfm2, names(dfm2)[1], transform, 
-                      dx2 = min(x[which(tangens==max(tangens))])
+        dfm3 <- ddply(dfm2, names(dfm2)[2], transform, 
+                      dx2 = max(x[which(tangens==max(tangens))])
                       )
-        dfm3 <- ddply(dfm3, .(id), transform, shiftx = min(x)-dx2)
+        dfm3 <- ddply(dfm3, .(id), transform, shiftx = max(x)-dx2)
         dfm3$x <- dfm3$x - dfm3$shiftx
-        browser()
+#        browser()
         dfm <- rbind(dfm, dfm3[,-(16:17)])
         geom_ribbon(aes(x=x,ymin=value -Freq, ymax= value, group=id, 
-                        fill=Nodeset),  alpha=alpha, data=dfm)
+                        fill=Nodeset),  colour="white", alpha=alpha, data=dfm)
       }
     }
   }
