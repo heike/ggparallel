@@ -69,7 +69,7 @@ gghammock(list("gear", "cyl"), data=mtcars, angle=0) + coord_flip() +
   scale_fill_brewer(palette="Set1")
 # example with more than two variables:
 titanic <- as.data.frame(Titanic)
-gghammock(list("Class", "Sex", "Survived"), data=titanic, weight="Freq", angle=0) +
+gghammock(list("Sex", "Class", "Survived"), data=titanic, weight="Freq", angle=0, order=c(1,1,-1)) +
   coord_flip() + scale_fill_brewer(palette=6, guide="none")
 # biological examples: genes and pathways
 data(genes)
@@ -78,6 +78,11 @@ gghammock(list("chrom", "path"), data = genes, color = "white",
   factorlevels =  c(sapply(unique(genes$chrom), as.character),
   unique(genes$path))) +
   scale_fill_manual(values = c(  rep("grey80", 24), brewer.pal("YlOrRd", n = 9)), guide="none") +
+  coord_flip()
+gghammock(list("path", "chrom"), data = genes, color = "white", width=0.1, order=c(-1,1),
+  factorlevels =  c(sapply(unique(genes$chrom), as.character),
+  unique(genes$path))) + scale_x_discrete(expand = c(0,0)) +
+  scale_fill_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") +
   coord_flip()
 }
 

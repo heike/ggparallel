@@ -41,10 +41,10 @@
 #'   unique(genes$path))) + 
 #'   scale_fill_manual(values = c(  rep("grey80", 24), brewer.pal("YlOrRd", n = 9)), guide="none") + 
 #'   coord_flip() 
-#' gghammock(list("chrom", "path"), data = genes, color = "white", order=c(-1,1),
+#' gghammock(list("path", "chrom"), data = genes, color = "white", width=0.1, order=c(-1,1),
 #'   factorlevels =  c(sapply(unique(genes$chrom), as.character), 
-#'   unique(genes$path))) + 
-#'   scale_fill_manual(values = c(  rep("grey80", 24), brewer.pal("YlOrRd", n = 9)), guide="none") + 
+#'   unique(genes$path))) + scale_x_discrete(expand = c(0,0)) +
+#'   scale_fill_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") + 
 #'   coord_flip() 
 
 
