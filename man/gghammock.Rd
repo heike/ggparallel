@@ -4,7 +4,7 @@
 \usage{
   gghammock(vars = list(), data, weight = NULL,
     method = "angle", alpha = 0.5, width = 0.25, order = 1,
-    color = NA, label = TRUE, angle = 90,
+    color = NA, asp = NULL, label = TRUE, angle = 90,
     text.offset = NULL, ...)
 }
 \arguments{
@@ -17,7 +17,8 @@
   \item{weight}{weighting variable - use character string}
 
   \item{method}{plotting method to use - one of
-  \code{parset}, \code{angle}}
+  \code{angle}, \code{parset}, or \code{hammock}, for a
+  hammock plot the aspect ratio needs to be fixed.}
 
   \item{alpha}{level of $\alpha$ blending for ribbons,
   value between 0 and 1, defaults to 0.5.}
@@ -35,11 +36,14 @@
   \item{label}{binary variable (vector), whether labels
   should be shown.}
 
-  \item{angle}{by which text for labelling is rotated.
-  Ignored if label = FALSE}
+  \item{angle}{numeric value in degrees, by which text for
+  labelling is rotated. Ignored if label = FALSE}
 
   \item{text.offset}{(vector) of values for offset the
   labels}
+
+  \item{asp}{aspect ratio of the plot - it will be set to a
+  default of 1 in the case of hammock plots.}
 
   \item{...}{passed on directly to all of the ggplot2
   commands}
@@ -60,18 +64,22 @@
 \examples{
 data(mtcars)
 gghammock(list("gear", "cyl"), data=mtcars)
-# compare with method='parset'
+## compare with method='parset'
 gghammock(list("gear", "cyl"), data=mtcars, method='parset')
-# flip plot and rotate text
+## flip plot and rotate text
 gghammock(list("gear", "cyl"), data=mtcars, angle=0) + coord_flip()
-# change colour scheme
+## change colour scheme
 gghammock(list("gear", "cyl"), data=mtcars, angle=0) + coord_flip() +
   scale_fill_brewer(palette="Set1")
-# example with more than two variables:
+## example with more than two variables:
 titanic <- as.data.frame(Titanic)
 gghammock(list("Sex", "Class", "Survived"), data=titanic, weight="Freq", angle=0, order=c(1,1,-1)) +
   coord_flip() + scale_fill_brewer(palette=6, guide="none")
-# biological examples: genes and pathways
+## hammock plot with same width lines
+gghammock(names(titanic)[c(1,4,2,3)], titanic, weight=1, asp=0.5, method="hammock", order=c(0,0))+opts( legend.position="none")
+## hammock plot with line widths adjusted by frequency
+gghammock(names(titanic)[c(1,4,2,3)], titanic, weight="Freq", asp=0.5, method="hammock", order=c(0,0))+opts( legend.position="none")
+## biological examples: genes and pathways
 data(genes)
 require(RColorBrewer)
 gghammock(list("chrom", "path"), data = genes, color = "white",
