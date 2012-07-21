@@ -23,21 +23,34 @@
 #' @examples
 #' data(mtcars)
 #' gghammock(list("gear", "cyl"), data=mtcars)
+#' 
 #' ## compare with method='parset'
 #' gghammock(list("gear", "cyl"), data=mtcars, method='parset')
+#' 
 #' ## flip plot and rotate text
 #' gghammock(list("gear", "cyl"), data=mtcars, angle=0) + coord_flip()
+#' 
 #' ## change colour scheme
 #' gghammock(list("gear", "cyl"), data=mtcars, angle=0) + coord_flip() + 
-#'   scale_fill_brewer(palette="Set1")
+#'   scale_fill_brewer(palette="Set1") + 
+#'   scale_colour_brewer(palette="Set1")
+#'   
 #' ## example with more than two variables:
 #' titanic <- as.data.frame(Titanic)
 #' gghammock(list("Sex", "Class", "Survived"), data=titanic, weight="Freq", angle=0, order=c(1,1,-1)) + 
-#'   coord_flip() + scale_fill_brewer(palette=6, guide="none")
+#'   coord_flip() + scale_fill_brewer(palette=6, guide="none") + 
+#'   scale_colour_brewer(palette=6, guide="none")
+#'   
 #' ## hammock plot with same width lines
-#' gghammock(names(titanic)[c(1,4,2,3)], titanic, weight=1, asp=0.5, method="hammock", order=c(0,0))+opts( legend.position="none")
+#' gghammock(names(titanic)[c(1,4,2,3)], titanic, weight=1, asp=0.5, method="hammock", order=c(0,0)) +
+#' opts( legend.position="none") + 
+#' scale_fill_brewer(palette="Paired") + 
+#' scale_colour_brewer(palette="Paired")
+#' 
 #' ## hammock plot with line widths adjusted by frequency
-#' gghammock(names(titanic)[c(1,4,2,3)], titanic, weight="Freq", asp=0.5, method="hammock", order=c(0,0))+opts( legend.position="none")
+#' gghammock(names(titanic)[c(1,4,2,3)], titanic, weight="Freq", asp=0.5, method="hammock", order=c(0,0)) + 
+#' opts( legend.position="none")
+#' 
 #' ## biological examples: genes and pathways
 #' data(genes)
 #' require(RColorBrewer)
@@ -45,11 +58,14 @@
 #'   factorlevels =  c(sapply(unique(genes$chrom), as.character), 
 #'   unique(genes$path))) + 
 #'   scale_fill_manual(values = c(  rep("grey80", 24), brewer.pal("YlOrRd", n = 9)), guide="none") + 
+#'   scale_colour_manual(values = c(  rep("grey80", 24), brewer.pal("YlOrRd", n = 9)), guide="none") +
 #'   coord_flip() 
+#'   
 #' gghammock(list("path", "chrom"), data = genes, color = "white", width=0.1, order=c(-1,1),
 #'   factorlevels =  c(sapply(unique(genes$chrom), as.character), 
 #'   unique(genes$path))) + scale_x_discrete(expand = c(0,0)) +
 #'   scale_fill_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") + 
+#'   scale_colour_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") +
 #'   coord_flip() 
 
 
@@ -123,6 +139,8 @@ gghammock <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5,
     dfxy$YY <- dfxy[,yname]
     
     dfm$Nodeset <- dfm[,xname]        
+    dfm$Nodeset <- factor(dfm$Nodeset, levels=llist)
+
     dfm$offset <- c(width/2,-width/2)[as.numeric(dfm$variable)]
     dfm$xid <- xid - 1
     dfm$yid <- yid
@@ -152,9 +170,8 @@ gghammock <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5,
       dfm3 <- ddply(dfm3, .(id), transform, shiftx = max(x)-dx2)
       dfm3$x <- dfm3$x - dfm3$shiftx
       dfm <- rbind(dfm, dfm3[,-(16:17)])
-      dfm$Nodeset <- factor(dfm$Nodeset)
       r <- geom_ribbon(aes(x=x,ymin=value -Freq, ymax= value, group=id, 
-                      fill=Nodeset), colour="grey80", alpha=alpha, data=dfm)
+                      fill=Nodeset, colour=Nodeset), alpha=alpha, data=dfm)
     }
     if (method=="hammock") {
       maxwidth = 0.1/2*sum(data$weight)
@@ -177,11 +194,12 @@ gghammock <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5,
 
       r <- geom_ribbon(aes(x=as.numeric(variable)+offset+xid, 
                            ymin=y-width, ymax=y+width, group=id, 
-                           fill=Nodeset),  alpha=alpha, data=dfm)
+                           fill=Nodeset),  alpha=alpha, data=dfm, drop=FALSE)
 #      browser()
     }
     r
   }
+  
   ## end helper function
   
   
@@ -217,8 +235,9 @@ gghammock <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5,
   }
   opts.layer <- NULL
   if (!is.null(asp)) opts.layer <- opts(aspect.ratio=asp)
-  ggplot() + geom_bar(aes(weight=weight, x=variable, fill=Nodeset), 
-                      colour = color, width=width, data=dfm) + 
-             llabels + xlab("")  + gr + opts.layer
+  ggplot() + geom_bar(aes(weight=weight, x=variable, fill=Nodeset, 
+                      #colour = color
+                      colour=Nodeset), width=width, data=dfm) + 
+             llabels + xlab("")  + gr + opts.layer + opts(drop=FALSE)
 }
 
