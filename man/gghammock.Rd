@@ -4,7 +4,7 @@
 \usage{
   gghammock(vars = list(), data, weight = NULL,
     method = "angle", alpha = 0.5, width = 0.25, order = 1,
-    color = NA, asp = NULL, label = TRUE, angle = 90,
+    asp = NULL, label = TRUE, angle = 90,
     text.offset = NULL, ...)
 }
 \arguments{
@@ -29,9 +29,6 @@
   levels in decreasing order, levels in increasing order
   and levels unchanged. This variable can be either a
   scalar or a vector}
-
-  \item{color}{colors for levels. if not specified, grey is
-  used}
 
   \item{label}{binary variable (vector), whether labels
   should be shown.}
@@ -95,18 +92,32 @@ opts( legend.position="none")
 ## biological examples: genes and pathways
 data(genes)
 require(RColorBrewer)
-gghammock(list("chrom", "path"), data = genes, color = "white",
+gghammock(list("chrom", "path"), data = genes,
   factorlevels =  c(sapply(unique(genes$chrom), as.character),
   unique(genes$path))) +
   scale_fill_manual(values = c(  rep("grey80", 24), brewer.pal("YlOrRd", n = 9)), guide="none") +
   scale_colour_manual(values = c(  rep("grey80", 24), brewer.pal("YlOrRd", n = 9)), guide="none") +
   coord_flip()
 
-gghammock(list("path", "chrom"), data = genes, color = "white", width=0.1, order=c(-1,1),
+gghammock(list("path", "chrom"), data = genes,  width=0.1, order=c(-1,1),
   factorlevels =  c(sapply(unique(genes$chrom), as.character),
   unique(genes$path))) + scale_x_discrete(expand = c(0,0)) +
   scale_fill_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") +
   scale_colour_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") +
   coord_flip()
+}
+\references{
+  Matthias Schonlau (2003) Visualizing Categorical Data
+  Arising in the Health Sciences Using Hammock Plots. In
+  Proceedings of the Section on Statistical Graphics of the
+  American Statistical Association.
+  \url{http://www.schonlau.net/publication/03jsm_hammockplot.pdf}
+
+  Robert Kosara, Fabian Bendix, Helwig Hauser (2006)
+  Parallel Sets: Interactive Exploration and Visual
+  Analysis of Categorical Data, Transactions on
+  Visualization and Computer Graphics (TVCG), vol. 12, no.
+  4, pp. 558–568.
+  \url{http://kosara.net/papers/2006/Kosara_TVCG_2006.pdf}
 }
 
