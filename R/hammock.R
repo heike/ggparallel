@@ -1,6 +1,7 @@
-#' Creating hammock plots and parallel sets
+#' Hammock plots and Parallel Sets
 #' 
-#' Hammock plots and parallel set plots allow visualization of pairwise relationships between categorical variables.
+#' Hammock plots and parallel sets allow visualization of pairwise relationships between categorical variables.
+#' 
 #' 
 #' more detailed description
 #' 
@@ -44,9 +45,9 @@
 #'   
 #' ## example with more than two variables:
 #' titanic <- as.data.frame(Titanic)
-#' gghammock(list("Sex", "Class", "Survived"), data=titanic, weight="Freq", angle=0, order=c(1,1,-1)) + 
-#'   coord_flip() + scale_fill_brewer(palette=6, guide="none") + 
-#'   scale_colour_brewer(palette=6, guide="none")
+#' gghammock(names(titanic)[c(1,4,2,1)], order=0, titanic, weight="Freq") + 
+#'   scale_fill_brewer(palette="Paired", guide="none") + 
+#'   scale_colour_brewer(palette="Paired", guide="none")
 #'   
 #' ## hammock plot with same width lines
 #' gghammock(names(titanic)[c(1,4,2,3)], titanic, weight=1, asp=0.5, method="hammock", order=c(0,0)) +
@@ -165,7 +166,7 @@ gghammock <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5,
                   dy=max(value) -min(value)
       )
       dfm$tangens = dfm$dy/dfm$dx
-      maxslope <- max(dfm$tangens)
+      maxslope <- 1.3*max(dfm$tangens) # add 15% of offset on each end of each variable
       dfm$newdx <- with(dfm, dy/maxslope)
       
       dfm2 <- dfm
