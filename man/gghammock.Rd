@@ -1,6 +1,6 @@
 \name{gghammock}
 \alias{gghammock}
-\title{Creating hammock plots and parallel sets}
+\title{Hammock plots and Parallel Sets}
 \usage{
   gghammock(vars = list(), data, weight = NULL,
     method = "angle", alpha = 0.5, width = 0.25, order = 1,
@@ -50,13 +50,11 @@
   used as base layer for additional modifications.
 }
 \description{
-  Hammock plots and parallel set plots allow visualization
-  of pairwise relationships between categorical variables.
+  Hammock plots and parallel sets allow visualization of
+  pairwise relationships between categorical variables.
 }
 \details{
-  more detailed description: we need to reference Kosara's
-  paper on parallel sets, we should also point to Matt
-  Schonlau's paper for the hammocks
+  more detailed description
 }
 \examples{
 data(mtcars)
@@ -75,9 +73,9 @@ gghammock(list("gear", "cyl"), data=mtcars, angle=0) + coord_flip() +
 
 ## example with more than two variables:
 titanic <- as.data.frame(Titanic)
-gghammock(list("Sex", "Class", "Survived"), data=titanic, weight="Freq", angle=0, order=c(1,1,-1)) +
-  coord_flip() + scale_fill_brewer(palette=6, guide="none") +
-  scale_colour_brewer(palette=6, guide="none")
+gghammock(names(titanic)[c(1,4,2,1)], order=0, titanic, weight="Freq") +
+  scale_fill_brewer(palette="Paired", guide="none") +
+  scale_colour_brewer(palette="Paired", guide="none")
 
 ## hammock plot with same width lines
 gghammock(names(titanic)[c(1,4,2,3)], titanic, weight=1, asp=0.5, method="hammock", order=c(0,0)) +
@@ -117,7 +115,7 @@ gghammock(list("path", "chrom"), data = genes,  width=0.1, order=c(-1,1),
   Parallel Sets: Interactive Exploration and Visual
   Analysis of Categorical Data, Transactions on
   Visualization and Computer Graphics (TVCG), vol. 12, no.
-  4, pp. 558–568.
+  4, pp. 558-568.
   \url{http://kosara.net/papers/2006/Kosara_TVCG_2006.pdf}
 }
 
