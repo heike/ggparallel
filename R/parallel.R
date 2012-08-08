@@ -64,17 +64,10 @@
 #' 
 #' ## biological examples: genes and pathways
 #' data(genes)
-#' require(RColorBrewer)
-#' ggparallel(list("chrom", "path"), data = genes, 
-#'   factorlevels =  c(sapply(unique(genes$chrom), as.character), 
-#'   unique(genes$path))) + 
-#'   scale_fill_manual(values = c(  rep("grey80", 24), brewer.pal("YlOrRd", n = 9)), guide="none") + 
-#'   scale_colour_manual(values = c(  rep("grey80", 24), brewer.pal("YlOrRd", n = 9)), guide="none") +
-#'   coord_flip() 
-#'   
+#' require(RColorBrewer)   
 #' ggparallel(list("path", "chrom"), data = genes,  width=0.1, order=c(-1,1),
 #'   factorlevels =  c(sapply(unique(genes$chrom), as.character), 
-#'   unique(genes$path))) + scale_x_discrete(expand = c(0,0)) +
+#'   unique(genes$path))) + 
 #'   scale_fill_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") + 
 #'   scale_colour_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") +
 #'   coord_flip() 
@@ -248,6 +241,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
   if (!is.null(asp)) opts.layer <- opts(aspect.ratio=asp)
   ggplot() + geom_bar(aes(weight=weight, x=variable, fill=Nodeset, 
                       colour=Nodeset), width=width, data=dfm) + 
-             llabels + xlab("")  + gr + opts.layer + opts(drop=FALSE)
+             xlab("")  + gr + opts.layer + opts(drop=FALSE) + llabels + 
+             scale_x_discrete(expand=c(0.1, 0.1))
 }
 
