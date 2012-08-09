@@ -19,6 +19,7 @@
 #' @param angle numeric value in degrees, by which text for labelling is rotated. Ignored if label = FALSE
 #' @param text.offset (vector) of values for offset the labels
 #' @param asp aspect ratio of the plot - it will be set to a default of 1 in the case of hammock plots.
+#' @param color value used for color of the boxes.
 #' @param ... passed on directly to all of the ggplot2 commands
 #' @return returns a  ggplot2 object that can be plotted directly or used as base layer for additional modifications.
 #' @export
@@ -65,15 +66,16 @@
 #' ## biological examples: genes and pathways
 #' data(genes)
 #' require(RColorBrewer)   
-#' ggparallel(list("path", "chrom"), data = genes,  width=0.1, order=c(-1,1),
-#'   factorlevels =  c(sapply(unique(genes$chrom), as.character), 
-#'   unique(genes$path))) + 
-#'   scale_fill_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") + 
-#'   scale_colour_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") +
-#'   coord_flip() 
+#' genes$chrom <- factor(genes$chrom, levels=c(paste("chr", 1:22, sep=""), "chrX", "chrY"))
+#' ggparallel(list("path", "chrom"), text.offset=c(0.03, 0,-0.03), data = genes,  width=0.1, order=c(1,0), angle=0, color="white",
+#'    factorlevels =  c(sapply(unique(genes$chrom), as.character), 
+#'      unique(genes$path))) + 
+#'    scale_fill_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") + 
+#'    scale_colour_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") +
+#'    coord_flip()
 
 
-ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5, width = 0.25, order = 1,  asp = NULL, label = TRUE, angle=90, text.offset=NULL, ...) {
+ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5, width = 0.25, order = 1,  asp = NULL, label = TRUE, angle=90, text.offset=NULL, color="white", ...) {
   ### error checking
   vars <- unlist(vars)
   k = length(vars)
@@ -239,8 +241,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
   }
   opts.layer <- NULL
   if (!is.null(asp)) opts.layer <- opts(aspect.ratio=asp)
-  ggplot() + geom_bar(aes(weight=weight, x=variable, fill=Nodeset, 
-                      colour=Nodeset), width=width, data=dfm) + 
+  ggplot() + geom_bar(aes(weight=weight, x=variable, fill=Nodeset), colour=color, width=width, data=dfm) + 
              xlab("")  + gr + opts.layer + opts(drop=FALSE) + llabels + 
              scale_x_discrete(expand=c(0.1, 0.1))
 }
