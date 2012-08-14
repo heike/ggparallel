@@ -1,8 +1,8 @@
-#' A package for creating hammock plots and parallel sets plots.
+#' A package for creating parallel coordinates for categorical data
 #'
-#' Eventually these functions are supposed to go into the \code{\link{GGally}} package. 
-#' 
+#' The main function \code{\linl{ggparallel}} implements three types of parallel coordinate plots for categorical data:
+#' hammock plots,  parallel sets plots, and common angle plots. Eventually these functions are supposed to go into the \code{\link{GGally}} package. 
 #'
 #' @docType package
-#' @name package-gghammock
+#' @name package-ggparallel
 NULL
