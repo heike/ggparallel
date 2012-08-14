@@ -1,12 +1,14 @@
 #' Data linking genes and pathways.
 #'
-#' Marie, could you try to describe how you got this data?. 
+#' Table knownGene from track UCSC Genes was downloaded from the UCSC table browser for the 
+#' human genome assembly (hg18, May 2006) and filtered for a selection of pathways associated with 
+#' human metabolism was obtained from KEGG PATHWAY database. Bioconductor package KEGG.db was used to provide
+#' mappings between gene and pathway identifiers.
 #' 
 #'
 #' @docType data
 #' @name genes
 #' @author Marie Vendettuoli \email{mariecv26@@gmail.com}
-#' @references \url{url to the repositories}
 #' @keywords data
 #' @examples
 #' data(genes)
@@ -18,4 +20,12 @@
 #'    scale_fill_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") + 
 #'    scale_colour_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") +
 #'    coord_flip()
+#' @references Fujita PA, Rhead B, Zweig AS, Hinrichs AS, Karolchik D, Cline MS, Goldman M, Barber GP, 
+#' Clawson H, Coelho A, Diekhans M, Dreszer TR, Giardine BM, Harte RA, Hillman-Jackson J, Hsu F, Kirkup V, 
+#' Kuhn RM, Learned K, Li CH, Meyer LR, Pohl A, Raney BJ, Rosenbloom KR, Smith KE, Haussler D, Kent WJ. 
+#' The UCSC Genome Browser database: update 2011. Nucleic Acids Res. 2010 Oct 18. \url{http://genome.ucsc.edu/index.html?org=Human&db=hg19&hgsid=289810087} \cr \cr
+#' Marc Carlson, Seth Falcon, Herve Pages and Nianhua Li (). KEGG.db: A set of annotation
+#' maps for KEGG. R package version 2.6.1. \cr \cr
+#' Kanehisa, M., Goto, S., Sato, Y., Furumichi, M., and Tanabe, M.; KEGG for integration and interpretation of large-scale molecular datasets. Nucleic Acids Res. 40, D109-D114 (2012) \cr \cr
+#' Kanehisa, M. and Goto, S.; KEGG: Kyoto Encyclopedia of Genes and Genomes. Nucleic Acids Res. 28, 27-30 (2000).
 NULL
