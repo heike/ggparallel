@@ -64,6 +64,7 @@
 #' ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight="Freq", asp=0.5, method="hammock", order=c(0,0)) + 
 #' opts( legend.position="none")
 #' 
+#' \dontrun{
 #' ## biological examples: genes and pathways
 #' data(genes)
 #' require(RColorBrewer)   
@@ -74,6 +75,7 @@
 #'    scale_fill_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") + 
 #'    scale_colour_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") +
 #'    coord_flip()
+#' }
 
 
 ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5, width = 0.25, order = 1,  ratio=0.2, asp = NULL, label = TRUE, angle=90, text.offset=NULL, color="white", ...) {
@@ -202,7 +204,6 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
       r <- geom_ribbon(aes(x=as.numeric(variable)+offset+xid, 
                            ymin=y-width, ymax=y+width, group=id, 
                            fill=Nodeset),  alpha=alpha, data=dfm, drop=FALSE)
-#      browser()
     }
     r
   }
@@ -217,7 +218,6 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
   subdata <- data[,c("weight", unlist(vars))]	
   dfm <- melt(subdata, id.var="weight")
   names(dfm)[3] <- "Nodeset"
-#browser()
   dfm$Nodeset <- factor(dfm$Nodeset, levels=llist)
   
   llabels <- NULL

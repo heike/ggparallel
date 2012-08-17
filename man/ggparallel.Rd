@@ -108,6 +108,7 @@ scale_colour_brewer(palette="Paired")
 ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight="Freq", asp=0.5, method="hammock", order=c(0,0)) +
 opts( legend.position="none")
 
+\dontrun{
 ## biological examples: genes and pathways
 data(genes)
 require(RColorBrewer)
@@ -118,6 +119,7 @@ ggparallel(list("path", "chrom"), text.offset=c(0.03, 0,-0.03), data = genes,  w
    scale_fill_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") +
    scale_colour_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") +
    coord_flip()
+}
 }
 \references{
   Matthias Schonlau (2003) Visualizing Categorical Data
