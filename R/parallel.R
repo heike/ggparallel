@@ -1,7 +1,7 @@
 #' Variations of parallel coordinate plots
 #' 
-#' Hammock plots and parallel sets allow visualization of pairwise relationships between categorical variables.
-#' 
+#' \code{\link{ggparallel}} implements and combines three types of parallel coordinate plots for categorical data:
+#' hammock plots,  parallel sets plots, and common angle plots. 
 #' 
 #' Parallel sets have been suggested by Kosara et al (2006) as a visualization technique to incorporate categorical variables into 
 #' a parallel coordinate plot (Wegman, Inselberg reference). However, perceptual problems with interpreting line widths,  make this chart type a victim of wrong conclusions.
@@ -12,7 +12,7 @@
 #' @param data data frame 
 #' @param weight weighting variable - use character string
 #' @param method plotting method to use - one of \code{angle}, \code{parset},  or \code{hammock}, for a hammock plot the aspect ratio needs to be fixed.
-#' @param alpha level of $\alpha$ blending for ribbons, value between 0 and 1, defaults to 0.5.
+#' @param alpha level of alpha blending for the fill color in ribbons, value has to be between 0 and 1, defaults to 0.5.
 #' @param width width of variables 
 #' @param order flag variable with three levels -1, 0, 1 for levels in decreasing order, levels in increasing order and levels unchanged. This variable can be either a scalar or a vector
 #' @param ratio only used for hammock displays: specifies the height (width for horizontal displays) of the widest line as ratio of the overall display height (width for horizontal displays).

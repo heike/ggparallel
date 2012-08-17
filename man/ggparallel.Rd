@@ -20,8 +20,9 @@
   \code{angle}, \code{parset}, or \code{hammock}, for a
   hammock plot the aspect ratio needs to be fixed.}
 
-  \item{alpha}{level of $\alpha$ blending for ribbons,
-  value between 0 and 1, defaults to 0.5.}
+  \item{alpha}{level of alpha blending for the fill color
+  in ribbons, value has to be between 0 and 1, defaults to
+  0.5.}
 
   \item{width}{width of variables}
 
@@ -57,8 +58,10 @@
   used as base layer for additional modifications.
 }
 \description{
-  Hammock plots and parallel sets allow visualization of
-  pairwise relationships between categorical variables.
+  \code{\link{ggparallel}} implements and combines three
+  types of parallel coordinate plots for categorical data:
+  hammock plots, parallel sets plots, and common angle
+  plots.
 }
 \details{
   Parallel sets have been suggested by Kosara et al (2006)
