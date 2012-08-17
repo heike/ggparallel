@@ -15,6 +15,7 @@
 #' @param alpha level of $\alpha$ blending for ribbons, value between 0 and 1, defaults to 0.5.
 #' @param width width of variables 
 #' @param order flag variable with three levels -1, 0, 1 for levels in decreasing order, levels in increasing order and levels unchanged. This variable can be either a scalar or a vector
+#' @param ratio only used for hammock displays: specifies the height (width for horizontal displays) of the widest line as ratio of the overall display height (width for horizontal displays).
 #' @param label binary variable (vector), whether labels should be shown.
 #' @param angle numeric value in degrees, by which text for labelling is rotated. Ignored if label = FALSE
 #' @param text.offset (vector) of values for offset the labels
@@ -75,7 +76,7 @@
 #'    coord_flip()
 
 
-ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5, width = 0.25, order = 1,  asp = NULL, label = TRUE, angle=90, text.offset=NULL, color="white", ...) {
+ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5, width = 0.25, order = 1,  ratio=0.2, asp = NULL, label = TRUE, angle=90, text.offset=NULL, color="white", ...) {
   ### error checking
   vars <- unlist(vars)
   k = length(vars)
@@ -180,7 +181,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
                       fill=Nodeset, colour=Nodeset), alpha=alpha, data=dfm)
     }
     if (method=="hammock") {
-      maxwidth = 0.1/2*sum(data$weight)
+      maxwidth = ratio/2*sum(data$weight)
       xtab <- ddply(dfxy, xname, summarise, value=sum(Freq))
       xtab$midx <- with(xtab, cumsum(value)- value/2)
       dfm <- merge(dfm, xtab[,c(xname, "midx")], by=xname)
@@ -241,7 +242,6 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
   }
   opts.layer <- NULL
   if (!is.null(asp)) opts.layer <- opts(aspect.ratio=asp)
-#  browser()
   ggplot() + geom_bar(aes(weight=weight, x=variable, fill=Nodeset, colour=Nodeset),  width=width, data=dfm) + 
              xlab("")  + gr + opts.layer + opts(drop=FALSE) + llabels + 
              scale_x_discrete(expand=c(0.1, 0.1)) 

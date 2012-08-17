@@ -4,7 +4,7 @@
 \usage{
   ggparallel(vars = list(), data, weight = NULL,
     method = "angle", alpha = 0.5, width = 0.25, order = 1,
-    asp = NULL, label = TRUE, angle = 90,
+    ratio = 0.2, asp = NULL, label = TRUE, angle = 90,
     text.offset = NULL, color = "white", ...)
 }
 \arguments{
@@ -29,6 +29,11 @@
   levels in decreasing order, levels in increasing order
   and levels unchanged. This variable can be either a
   scalar or a vector}
+
+  \item{ratio}{only used for hammock displays: specifies
+  the height (width for horizontal displays) of the widest
+  line as ratio of the overall display height (width for
+  horizontal displays).}
 
   \item{label}{binary variable (vector), whether labels
   should be shown.}
