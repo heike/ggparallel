@@ -233,16 +233,17 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
   	label.stats$text.offset <- rep(text.offset, length=nrow(label.stats))
   	 
 	  varnames <- paste(unlist(vars), sep="|", collapse="|")
-	  label.stats$Nodeset <- gsub(sprintf("(%s):(.*)",varnames),"\\2", as.character(label.stats$Nodeset))
-	  llabels <- list(geom_text(aes(x=as.numeric(variable)+text.offset, y=ypos, label=Nodeset),
+	  label.stats$labels <- gsub(sprintf("(%s):(.*)",varnames),"\\2", as.character(label.stats$Nodeset))
+    llabels <- list(geom_text(aes(x=as.numeric(variable)+text.offset, y=ypos, label=labels),
 	                      colour = "grey20", data=label.stats, angle=angle, size=4), 
-	                  geom_text(aes(x=as.numeric(variable)+0.01+text.offset, y=ypos-0.01, label=Nodeset),
+	                  geom_text(aes(x=as.numeric(variable)+0.01+text.offset, y=ypos-0.01, label=labels),
 	                      colour = "grey90", data=label.stats, angle=angle, size=4)) 
   }
   opts.layer <- NULL
   if (!is.null(asp)) opts.layer <- opts(aspect.ratio=asp)
-  ggplot() + geom_bar(aes(weight=weight, x=variable, fill=Nodeset), colour=color, width=width, data=dfm) + 
+#  browser()
+  ggplot() + geom_bar(aes(weight=weight, x=variable, fill=Nodeset, colour=Nodeset),  width=width, data=dfm) + 
              xlab("")  + gr + opts.layer + opts(drop=FALSE) + llabels + 
-             scale_x_discrete(expand=c(0.1, 0.1))
+             scale_x_discrete(expand=c(0.1, 0.1)) 
 }
 
