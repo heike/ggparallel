@@ -99,7 +99,7 @@ ggparallel(names(titanic)[c(1,4,2,1)], order=0, titanic, weight="Freq") +
   scale_colour_brewer(palette="Paired", guide="none")
 
 ## hammock plot with same width lines
-ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight=1, asp=0.5, method="hammock", order=c(0,0)) +
+ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight=1, asp=0.5, method="hammock", ratio=0.4, order=c(0,0)) +
 opts( legend.position="none") +
 scale_fill_brewer(palette="Paired") +
 scale_colour_brewer(palette="Paired")

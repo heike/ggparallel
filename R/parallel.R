@@ -55,7 +55,7 @@
 #'   scale_colour_brewer(palette="Paired", guide="none")
 #'   
 #' ## hammock plot with same width lines
-#' ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight=1, asp=0.5, method="hammock", order=c(0,0)) +
+#' ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight=1, asp=0.5, method="hammock", ratio=0.4, order=c(0,0)) +
 #' opts( legend.position="none") + 
 #' scale_fill_brewer(palette="Paired") + 
 #' scale_colour_brewer(palette="Paired")
@@ -84,13 +84,13 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
   k = length(vars)
   if (k < 2) message("Error: ggparallel needs at least two variables. Use vars=list('X', 'Y')")
   
-  ### if user doesn't specify the weight, assign value of 1. 
+  ## if user doesn't specify the weight, assign value of 1. 
   data$weight <- weight
   if (is.null(weight)) data$weight <- 1
   if (is.character(weight)) data$weight <- data[,weight]
   
   ## if ordering is selected, organize x and y axis by weight
-  # make order a vector of length length(vars)
+  ## make order a vector of length length(vars)
   order <- rep(order, length=length(vars))
   for (i in 1:length(vars)){
 	if (! is.factor(data[,vars[i]])) 
@@ -119,6 +119,17 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
     
     xname <- x
     yname <- y
+ 
+    ## introduce new variables as fail-safe, if local binding fails:
+    variable <- NULL
+    value <- NULL
+    Freq <- NULL
+    Nodeset <- NULL
+    tangens <- NULL
+    dx2 <- NULL
+    midx <- NULL
+    midy <- NULL
+    ypos <- NULL
     
     ## create the data table, x, y, and weight
     dfxy <- as.data.frame(xtabs(data$weight~data[,x] + data[,y]))
@@ -153,6 +164,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
     dfm$offset <- c(width/2,-width/2)[as.numeric(dfm$variable)]
     dfm$xid <- xid - 1
     dfm$yid <- yid
+    
     
     if (method=="parset") {
       r <- geom_ribbon(aes(x=as.numeric(variable)+offset+xid,
@@ -209,7 +221,12 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
   }
   
   ## end helper function
-  
+
+  ## local variables
+  variable <- NULL
+  Freq <- NULL
+  Nodeset <- NULL
+  ypos <- NULL  
   
   gr <- list()
   for (i in 1:(length(vars)-1))
