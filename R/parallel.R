@@ -17,7 +17,7 @@
 #' @param order flag variable with three levels -1, 0, 1 for levels in decreasing order, levels in increasing order and levels unchanged. This variable can be either a scalar or a vector
 #' @param ratio only used for hammock displays: specifies the height (width for horizontal displays) of the widest line as ratio of the overall display height (width for horizontal displays).
 #' @param label binary variable (vector), whether labels should be shown.
-#' @param angle numeric value in degrees, by which text for labelling is rotated. Ignored if label = FALSE
+#' @param text.angle numeric value in degrees, by which text for labelling is rotated. Ignored if label = FALSE
 #' @param text.offset (vector) of values for offset the labels
 #' @param asp aspect ratio of the plot - it will be set to a default of 1 in the case of hammock plots.
 #' @param color value used for color of the boxes.
@@ -36,15 +36,16 @@
 #' @examples
 #' data(mtcars)
 #' ggparallel(list("gear", "cyl"), data=mtcars)
+#' ggparallel(list("gear", "cyl"), data=mtcars, method="hammock")
 #' 
 #' ## compare with method='parset'
 #' ggparallel(list("gear", "cyl"), data=mtcars, method='parset')
 #' 
 #' ## flip plot and rotate text
-#' ggparallel(list("gear", "cyl"), data=mtcars, angle=0) + coord_flip()
+#' ggparallel(list("gear", "cyl"), data=mtcars, text.angle=0) + coord_flip()
 #' 
 #' ## change colour scheme
-#' ggparallel(list("gear", "cyl"), data=mtcars, angle=0) + coord_flip() + 
+#' ggparallel(list("gear", "cyl"), data=mtcars, text.angle=0) + coord_flip() + 
 #'   scale_fill_brewer(palette="Set1") + 
 #'   scale_colour_brewer(palette="Set1")
 #'   
@@ -55,7 +56,7 @@
 #'   scale_colour_brewer(palette="Paired", guide="none")
 #'   
 #' ## hammock plot with same width lines
-#' ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight=1, asp=0.5, method="hammock", ratio=0.4, order=c(0,0)) +
+#' ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight=1, asp=0.5, method="hammock", ratio=0.2, order=c(0,0)) +
 #' opts( legend.position="none") + 
 #' scale_fill_brewer(palette="Paired") + 
 #' scale_colour_brewer(palette="Paired")
@@ -78,7 +79,7 @@
 #' }
 
 
-ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5, width = 0.25, order = 1,  ratio=0.2, asp = NULL, label = TRUE, angle=90, text.offset=NULL, color="white", ...) {
+ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5, width = 0.25, order = 1,  ratio=0.2, asp = NULL, label = TRUE, text.angle=90, text.offset=NULL, color="white", ...) {
   ### error checking
   vars <- unlist(vars)
   k = length(vars)
@@ -130,6 +131,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
     midx <- NULL
     midy <- NULL
     ypos <- NULL
+    varn <- NULL
     
     ## create the data table, x, y, and weight
     dfxy <- as.data.frame(xtabs(data$weight~data[,x] + data[,y]))
@@ -191,8 +193,10 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
       dfm3 <- ddply(dfm3, .(id), transform, shiftx = max(x)-dx2)
       dfm3$x <- dfm3$x - dfm3$shiftx
       dfm <- rbind(dfm, dfm3[,-(16:17)])
+#      r <- geom_ribbon(aes(x=x,ymin=value -Freq, ymax= value, group=id, 
+#                      fill=Nodeset, colour=Nodeset), alpha=alpha, data=dfm)
       r <- geom_ribbon(aes(x=x,ymin=value -Freq, ymax= value, group=id, 
-                      fill=Nodeset, colour=Nodeset), alpha=alpha, data=dfm)
+                            fill=Nodeset), alpha=alpha, data=dfm)
     }
     if (method=="hammock") {
       maxwidth = ratio/2*sum(data$weight)
@@ -202,17 +206,21 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
       ytab <- ddply(dfxy, yname, summarise, value=sum(Freq))
       ytab$midy <- with(ytab, cumsum(value)- value/2)
       dfm <- merge(dfm, ytab[,c(yname, "midy")], by=yname)
-      dfm <- ddply(dfm, .(id), transform, 
-                   x = min(as.numeric(variable)+offset+xid),
-                   xend = max(as.numeric(variable)+offset+xid),
-                   y=c(midx[1], midy[1]),
-                   yend=c(midx[2], midy[2]),
-                   tangens = max(midy)-min(midx))
       plot.asp <- length(vars)/(1.1*sum(data$weight))*asp
+      
+      dfm$varn <- as.numeric(dfm$variable)
+      dfm <- transform(dfm, 
+                       x = min(varn+offset+xid),
+                       xend = max(varn+offset+xid),
+                       tangens = max(midy)-min(midx)
+                       )
       dfm$tangens <- with(dfm, tangens/max(xend-x)*plot.asp)
       dfm$width <- with(dfm, Freq/cos(atan(tangens)))
-      dfm$width <- with(dfm, width*maxwidth/max(width))
-
+      dfm$width <- with(dfm, width*maxwidth/max(width))      
+      dfm <- ddply(dfm, .(id), transform, 
+                   y=c(midx[1], midy[1])[varn]
+                   )
+      
       r <- geom_ribbon(aes(x=as.numeric(variable)+offset+xid, 
                            ymin=y-width, ymax=y+width, group=id, 
                            fill=Nodeset),  alpha=alpha, data=dfm, drop=FALSE)
@@ -253,9 +261,9 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
 	  varnames <- paste(unlist(vars), sep="|", collapse="|")
 	  label.stats$labels <- gsub(sprintf("(%s):(.*)",varnames),"\\2", as.character(label.stats$Nodeset))
     llabels <- list(geom_text(aes(x=as.numeric(variable)+text.offset, y=ypos, label=labels),
-	                      colour = "grey20", data=label.stats, angle=angle, size=4), 
+	                      colour = "grey20", data=label.stats, angle=text.angle, size=4), 
 	                  geom_text(aes(x=as.numeric(variable)+0.01+text.offset, y=ypos-0.01, label=labels),
-	                      colour = "grey90", data=label.stats, angle=angle, size=4)) 
+	                      colour = "grey90", data=label.stats, angle=text.angle, size=4)) 
   }
   opts.layer <- NULL
   if (!is.null(asp)) opts.layer <- opts(aspect.ratio=asp)

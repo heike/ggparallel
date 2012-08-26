@@ -4,7 +4,7 @@
 \usage{
   ggparallel(vars = list(), data, weight = NULL,
     method = "angle", alpha = 0.5, width = 0.25, order = 1,
-    ratio = 0.2, asp = NULL, label = TRUE, angle = 90,
+    ratio = 0.2, asp = NULL, label = TRUE, text.angle = 90,
     text.offset = NULL, color = "white", ...)
 }
 \arguments{
@@ -39,8 +39,8 @@
   \item{label}{binary variable (vector), whether labels
   should be shown.}
 
-  \item{angle}{numeric value in degrees, by which text for
-  labelling is rotated. Ignored if label = FALSE}
+  \item{text.angle}{numeric value in degrees, by which text
+  for labelling is rotated. Ignored if label = FALSE}
 
   \item{text.offset}{(vector) of values for offset the
   labels}
@@ -80,15 +80,16 @@
 \examples{
 data(mtcars)
 ggparallel(list("gear", "cyl"), data=mtcars)
+ggparallel(list("gear", "cyl"), data=mtcars, method="hammock")
 
 ## compare with method='parset'
 ggparallel(list("gear", "cyl"), data=mtcars, method='parset')
 
 ## flip plot and rotate text
-ggparallel(list("gear", "cyl"), data=mtcars, angle=0) + coord_flip()
+ggparallel(list("gear", "cyl"), data=mtcars, text.angle=0) + coord_flip()
 
 ## change colour scheme
-ggparallel(list("gear", "cyl"), data=mtcars, angle=0) + coord_flip() +
+ggparallel(list("gear", "cyl"), data=mtcars, text.angle=0) + coord_flip() +
   scale_fill_brewer(palette="Set1") +
   scale_colour_brewer(palette="Set1")
 
@@ -99,7 +100,7 @@ ggparallel(names(titanic)[c(1,4,2,1)], order=0, titanic, weight="Freq") +
   scale_colour_brewer(palette="Paired", guide="none")
 
 ## hammock plot with same width lines
-ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight=1, asp=0.5, method="hammock", ratio=0.4, order=c(0,0)) +
+ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight=1, asp=0.5, method="hammock", ratio=0.2, order=c(0,0)) +
 opts( legend.position="none") +
 scale_fill_brewer(palette="Paired") +
 scale_colour_brewer(palette="Paired")
