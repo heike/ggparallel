@@ -109,7 +109,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
   	levels(data[,i]) <- paste(i, levels(data[,i]), sep=":")
     llist <- c(llist, levels(data[,i]))
   }
-  if (method=="hammock") 
+  if ((method=="hammock") | (method=="adj.angle"))
     if (is.null(asp)) asp <- 1
     
   ## helper function
@@ -193,10 +193,35 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
       dfm3 <- ddply(dfm3, .(id), transform, shiftx = max(x)-dx2)
       dfm3$x <- dfm3$x - dfm3$shiftx
       dfm <- rbind(dfm, dfm3[,-(16:17)])
-#      r <- geom_ribbon(aes(x=x,ymin=value -Freq, ymax= value, group=id, 
-#                      fill=Nodeset, colour=Nodeset), alpha=alpha, data=dfm)
       r <- geom_ribbon(aes(x=x,ymin=value -Freq, ymax= value, group=id, 
                             fill=Nodeset), alpha=alpha, data=dfm)
+    }
+    if (method == "adj.angle") {     
+      dfm$x <- with(dfm, as.numeric(variable)+offset+xid)
+      dfm<- ddply(dfm, .(id), transform, 
+                  dx=max(x)-min(x),
+                  dy=max(value) -min(value)
+      )
+      dfm$tangens = dfm$dy/dfm$dx
+      maxslope <- 1.3*max(dfm$tangens) # add 15% of offset on each end of each variable
+      dfm$newdx <- with(dfm, dy/maxslope)
+      
+      dfm2 <- dfm
+      dfm2$offset <- with(dfm, (abs(offset) + (dx-newdx)/2) * sign(offset))
+      dfm2$x <- with(dfm2, as.numeric(variable)+offset+xid)
+      dfm3 <- ddply(dfm2, names(dfm2)[2], transform, 
+                    dx2 = max(x[which(tangens==max(tangens))])
+      )
+      dfm3 <- ddply(dfm3, .(id), transform, shiftx = max(x)-dx2)
+      dfm3$x <- dfm3$x #- dfm3$shiftx
+      dfm <- rbind(dfm, dfm3[,-(16:17)])
+      dfm <- transform(dfm, ymin=value-Freq, ymax=value)
+      dfm <- transform(dfm, ymid=(ymax+ymin)/2)
+      plot.asp <- length(vars)/(1.1*sum(data$weight))*asp
+browser()      
+      qplot(x, ymid, data=dfm, geom=c("line"), alpha=I(0.5), group=id, colour=factor(gear), size=Freq)+scale_size(range=4.2*c(min(dfm$Freq),max(dfm$Freq))) + scale_colour_discrete() + opts(legend.position="none") + ylim(c(0, 1.05*sum(data$weight)))
+      r <- geom_ribbon(aes(x=x,ymin=ymin, ymax= ymax, group=id, 
+                           fill=Nodeset), alpha=alpha, data=dfm)
     }
     if (method=="hammock") {
       maxwidth = ratio/2*sum(data$weight)
