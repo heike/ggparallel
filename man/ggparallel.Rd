@@ -17,8 +17,9 @@
   \item{weight}{weighting variable - use character string}
 
   \item{method}{plotting method to use - one of
-  \code{angle}, \code{parset}, or \code{hammock}, for a
-  hammock plot the aspect ratio needs to be fixed.}
+  \code{angle}, \code{adj.angle}, \code{parset}, or
+  \code{hammock}, for a hammock plot the aspect ratio needs
+  to be fixed.}
 
   \item{alpha}{level of alpha blending for the fill color
   in ribbons, value has to be between 0 and 1, defaults to
@@ -58,10 +59,11 @@
   used as base layer for additional modifications.
 }
 \description{
-  \code{\link{ggparallel}} implements and combines three
-  types of parallel coordinate plots for categorical data:
-  hammock plots, parallel sets plots, and common angle
-  plots.
+  \code{\link{ggparallel}} implements and combines
+  different types of parallel coordinate plots for
+  categorical data: hammock plots, parallel sets plots,
+  common angle plots, and common angle plots with a
+  hammock-like adjustment for line widths.
 }
 \details{
   Parallel sets have been suggested by Kosara et al (2006)
@@ -75,7 +77,10 @@
   by a factor countering the strength of the illusion, in
   the common angle plot all lines are adjusted to show the
   same angle - making line widths again comparable across
-  ribbons.
+  ribbons. Additionally, we can also adjust ribbons in the
+  common angle display for the angle, to make them appear
+  having the same width (or height) across the display. We
+  refer to this method as \code{adj.angle}.
 }
 \examples{
 data(mtcars)

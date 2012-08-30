@@ -1,17 +1,19 @@
 #' Variations of parallel coordinate plots
 #' 
-#' \code{\link{ggparallel}} implements and combines three types of parallel coordinate plots for categorical data:
-#' hammock plots,  parallel sets plots, and common angle plots. 
+#' \code{\link{ggparallel}} implements and combines different types of parallel coordinate plots for 
+#' categorical data:
+#' hammock plots,  parallel sets plots, common angle plots, and common angle plots with a hammock-like adjustment for line widths. 
 #' 
 #' Parallel sets have been suggested by Kosara et al (2006) as a visualization technique to incorporate categorical variables into 
 #' a parallel coordinate plot (Wegman, Inselberg reference). However, perceptual problems with interpreting line widths,  make this chart type a victim of wrong conclusions.
-#' The hammock display (Schonlau 2003) and the common angle plots are two approaches at fixing this problem: in Hammock plots the linewidth is adjusted by a factor countering
-#' the strength of the illusion, in the common angle plot all lines are adjusted to show the same angle - making line widths again comparable across ribbons. 
+#' The  hammock display (Schonlau 2003) and the common angle plots are two approaches at fixing this problem: in Hammock plots the linewidth is adjusted by a factor countering
+#' the strength of the illusion, in the common angle plot all lines are adjusted to show the same angle - making line widths again comparable across ribbons. Additionally, we can also adjust ribbons
+#' in the common angle display for the angle, to make them appear having the same width (or height) across the display. We refer to this method as \code{adj.angle}. 
 #' 
 #' @param vars list of variable names to be included in the plotting. order of the variables is preserved in the display
 #' @param data data frame 
 #' @param weight weighting variable - use character string
-#' @param method plotting method to use - one of \code{angle}, \code{parset},  or \code{hammock}, for a hammock plot the aspect ratio needs to be fixed.
+#' @param method plotting method to use - one of \code{angle}, \code{adj.angle}, \code{parset},  or \code{hammock}, for a hammock plot the aspect ratio needs to be fixed.
 #' @param alpha level of alpha blending for the fill color in ribbons, value has to be between 0 and 1, defaults to 0.5.
 #' @param width width of variables 
 #' @param order flag variable with three levels -1, 0, 1 for levels in decreasing order, levels in increasing order and levels unchanged. This variable can be either a scalar or a vector
@@ -109,7 +111,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
   	levels(data[,i]) <- paste(i, levels(data[,i]), sep=":")
     llist <- c(llist, levels(data[,i]))
   }
-  if ((method=="hammock") | (method=="adj.angle"))
+  if ((method=="hammock"))# | (method=="adj.angle"))
     if (is.null(asp)) asp <- 1
     
   ## helper function
@@ -217,11 +219,11 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
       dfm <- rbind(dfm, dfm3[,-(16:17)])
       dfm <- transform(dfm, ymin=value-Freq, ymax=value)
       dfm <- transform(dfm, ymid=(ymax+ymin)/2)
-      plot.asp <- length(vars)/(1.1*sum(data$weight))*asp
-browser()      
-      qplot(x, ymid, data=dfm, geom=c("line"), alpha=I(0.5), group=id, colour=factor(gear), size=Freq)+scale_size(range=4.2*c(min(dfm$Freq),max(dfm$Freq))) + scale_colour_discrete() + opts(legend.position="none") + ylim(c(0, 1.05*sum(data$weight)))
-      r <- geom_ribbon(aes(x=x,ymin=ymin, ymax= ymax, group=id, 
-                           fill=Nodeset), alpha=alpha, data=dfm)
+#      plot.asp <- length(vars)/(1.1*sum(data$weight))*asp
+#      qplot(x, ymid, data=dfm, geom=c("line"), alpha=I(0.5), group=id, colour=factor(gear), size=Freq)+scale_size(range=4.2*c(min(dfm$Freq),max(dfm$Freq))) + scale_colour_discrete() + opts(legend.position="none") + ylim(c(0, 1.05*sum(data$weight)))
+#browser()
+      r <- list(geom_line(aes(x=x,y=ymid, group=id, colour=Nodeset, size=Freq), alpha=alpha, data=dfm),
+        scale_size(guide="none", range=ratio*max(dfm$Freq)*c(min(dfm$Freq),max(dfm$Freq)))) #+ scale_colour_discrete()       
     }
     if (method=="hammock") {
       maxwidth = ratio/2*sum(data$weight)
