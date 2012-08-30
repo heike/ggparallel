@@ -32,9 +32,10 @@
   and levels unchanged. This variable can be either a
   scalar or a vector}
 
-  \item{ratio}{only used for hammock displays: specifies
-  the height (width for horizontal displays) of the widest
-  line as ratio of the overall display height (width for
+  \item{ratio}{used for methods with angle adjustments
+  (method = \code{'hammock', 'adj.angle'}): specifies the
+  height (width for horizontal displays) of the widest line
+  as ratio of the overall display height (width for
   horizontal displays).}
 
   \item{label}{binary variable (vector), whether labels
@@ -86,6 +87,9 @@
 data(mtcars)
 ggparallel(list("gear", "cyl"), data=mtcars)
 ggparallel(list("gear", "cyl"), data=mtcars, method="hammock")
+
+## combination of common angle plot and hammock adjustment:
+ggparallel(list("gear", "cyl"), data=mtcars, method="adj.angle")
 
 ## compare with method='parset'
 ggparallel(list("gear", "cyl"), data=mtcars, method='parset')

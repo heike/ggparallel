@@ -17,7 +17,7 @@
 #' @param alpha level of alpha blending for the fill color in ribbons, value has to be between 0 and 1, defaults to 0.5.
 #' @param width width of variables 
 #' @param order flag variable with three levels -1, 0, 1 for levels in decreasing order, levels in increasing order and levels unchanged. This variable can be either a scalar or a vector
-#' @param ratio only used for hammock displays: specifies the height (width for horizontal displays) of the widest line as ratio of the overall display height (width for horizontal displays).
+#' @param ratio  used for methods with angle adjustments (method = \code{'hammock', 'adj.angle'}): specifies the height (width for horizontal displays) of the widest line as ratio of the overall display height (width for horizontal displays).
 #' @param label binary variable (vector), whether labels should be shown.
 #' @param text.angle numeric value in degrees, by which text for labelling is rotated. Ignored if label = FALSE
 #' @param text.offset (vector) of values for offset the labels
@@ -39,6 +39,9 @@
 #' data(mtcars)
 #' ggparallel(list("gear", "cyl"), data=mtcars)
 #' ggparallel(list("gear", "cyl"), data=mtcars, method="hammock")
+#' 
+#' ## combination of common angle plot and hammock adjustment:
+#' ggparallel(list("gear", "cyl"), data=mtcars, method="adj.angle")
 #' 
 #' ## compare with method='parset'
 #' ggparallel(list("gear", "cyl"), data=mtcars, method='parset')
