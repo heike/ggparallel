@@ -4,7 +4,7 @@ Changes across different versions
 ------------------------------------------------------------
 Version 0.1.1
 ------------------------------------------------------------
+* new feature: added method 'adj.angle'
 * renamed parameter angle to text.angle
 * removed colour from outline of common angle ribbons
-* order of variables considered in drawing ribbons for hammock plots
-* added method 'adj.angle'
+* bug fix: order of variables considered in drawing ribbons for hammock plots

@@ -110,13 +110,13 @@ ggparallel(names(titanic)[c(1,4,2,1)], order=0, titanic, weight="Freq") +
 
 ## hammock plot with same width lines
 ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight=1, asp=0.5, method="hammock", ratio=0.2, order=c(0,0)) +
-opts( legend.position="none") +
+theme( legend.position="none") +
 scale_fill_brewer(palette="Paired") +
 scale_colour_brewer(palette="Paired")
 
 ## hammock plot with line widths adjusted by frequency
 ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight="Freq", asp=0.5, method="hammock", order=c(0,0)) +
-opts( legend.position="none")
+theme( legend.position="none")
 
 \dontrun{
 ## biological examples: genes and pathways

@@ -62,13 +62,13 @@
 #'   
 #' ## hammock plot with same width lines
 #' ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight=1, asp=0.5, method="hammock", ratio=0.2, order=c(0,0)) +
-#' opts( legend.position="none") + 
+#' theme( legend.position="none") + 
 #' scale_fill_brewer(palette="Paired") + 
 #' scale_colour_brewer(palette="Paired")
 #' 
 #' ## hammock plot with line widths adjusted by frequency
 #' ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight="Freq", asp=0.5, method="hammock", order=c(0,0)) + 
-#' opts( legend.position="none")
+#' theme( legend.position="none")
 #' 
 #' \dontrun{
 #' ## biological examples: genes and pathways
@@ -137,6 +137,9 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
     midy <- NULL
     ypos <- NULL
     varn <- NULL
+    ymax <- NULL
+    ymin <- NULL
+    ymid <- NULL
     
     ## create the data table, x, y, and weight
     dfxy <- as.data.frame(xtabs(data$weight~data[,x] + data[,y]))
@@ -223,7 +226,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
       dfm <- transform(dfm, ymin=value-Freq, ymax=value)
       dfm <- transform(dfm, ymid=(ymax+ymin)/2)
 #      plot.asp <- length(vars)/(1.1*sum(data$weight))*asp
-#      qplot(x, ymid, data=dfm, geom=c("line"), alpha=I(0.5), group=id, colour=factor(gear), size=Freq)+scale_size(range=4.2*c(min(dfm$Freq),max(dfm$Freq))) + scale_colour_discrete() + opts(legend.position="none") + ylim(c(0, 1.05*sum(data$weight)))
+#      qplot(x, ymid, data=dfm, geom=c("line"), alpha=I(0.5), group=id, colour=factor(gear), size=Freq)+scale_size(range=4.2*c(min(dfm$Freq),max(dfm$Freq))) + scale_colour_discrete() + theme(legend.position="none") + ylim(c(0, 1.05*sum(data$weight)))
 #browser()
       r <- list(geom_line(aes(x=x,y=ymid, group=id, colour=Nodeset, size=Freq), alpha=alpha, data=dfm),
         scale_size(guide="none", range=ratio*max(dfm$Freq)*c(min(dfm$Freq),max(dfm$Freq)))) #+ scale_colour_discrete()       
@@ -253,7 +256,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
       
       r <- geom_ribbon(aes(x=as.numeric(variable)+offset+xid, 
                            ymin=y-width, ymax=y+width, group=id, 
-                           fill=Nodeset),  alpha=alpha, data=dfm, drop=FALSE)
+                           fill=Nodeset),  alpha=alpha, data=dfm) #, drop=FALSE)
     }
     r
   }
@@ -295,10 +298,11 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
 	                  geom_text(aes(x=as.numeric(variable)+0.01+text.offset, y=ypos-0.01, label=labels),
 	                      colour = "grey90", data=label.stats, angle=text.angle, size=4)) 
   }
-  opts.layer <- NULL
-  if (!is.null(asp)) opts.layer <- opts(aspect.ratio=asp)
+  theme.layer <- NULL
+  if (!is.null(asp)) theme.layer <- theme(aspect.ratio=asp)
   ggplot() + geom_bar(aes(weight=weight, x=variable, fill=Nodeset, colour=Nodeset),  width=width, data=dfm) + 
-             xlab("")  + gr + opts.layer + opts(drop=FALSE) + llabels + 
+             xlab("")  + gr + theme.layer + llabels + 
              scale_x_discrete(expand=c(0.1, 0.1)) 
+  # theme(drop=FALSE)
 }
 
