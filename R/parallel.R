@@ -4,9 +4,11 @@
 #' categorical data:
 #' hammock plots,  parallel sets plots, common angle plots, and common angle plots with a hammock-like adjustment for line widths. 
 #' 
-#' Parallel sets have been suggested by Kosara et al (2006) as a visualization technique to incorporate categorical variables into 
-#' a parallel coordinate plot (Wegman, Inselberg reference). However, perceptual problems with interpreting line widths,  make this chart type a victim of wrong conclusions.
-#' The  hammock display (Schonlau 2003) and the common angle plots are two approaches at fixing this problem: in Hammock plots the linewidth is adjusted by a factor countering
+#' Parallel sets have been suggested by \cite{kosara:2006} as a visualization technique to incorporate categorical variables into 
+#' a parallel coordinate plot introduced by \cite{wegman:1990} and \cite{inselberg:1985}. The parallel sets implemented here are reduced to representations of neighboring two-dimensional relationships only rather than the hierarchical version originally suggested. 
+#' Both versions, 
+#' however, show perceptual problems with interpreting line widths, leading to potentially wrong conclusions about the data.
+#' The  hammock display, introduced by \cite{schonlau:2003}, and the common angle plots are two approaches at fixing this problem: in Hammock plots the linewidth is adjusted by a factor countering
 #' the strength of the illusion, in the common angle plot all lines are adjusted to show the same angle - making line widths again comparable across ribbons. Additionally, we can also adjust ribbons
 #' in the common angle display for the angle, to make them appear having the same width (or height) across the display. We refer to this method as \code{adj.angle}. 
 #' 
@@ -26,14 +28,7 @@
 #' @param ... passed on directly to all of the ggplot2 commands
 #' @return returns a  ggplot2 object that can be plotted directly or used as base layer for additional modifications.
 #' @export
-#' @references
-#' Matthias Schonlau (2003) Visualizing Categorical Data Arising in the Health Sciences
-#' Using Hammock Plots. In Proceedings of the Section on Statistical Graphics of the 
-#' American Statistical Association. \url{http://www.schonlau.net/publication/03jsm_hammockplot.pdf}
-#' 
-#' Robert Kosara, Fabian Bendix, Helwig Hauser (2006) 
-#' Parallel Sets: Interactive Exploration and Visual Analysis of Categorical Data, 
-#' Transactions on Visualization and Computer Graphics (TVCG), vol. 12, no. 4, pp. 558-568. \url{http://kosara.net/papers/2006/Kosara_TVCG_2006.pdf}
+#' @cite kosara:2006 schonlau:2003 wegman:1990 inselberg:1985
 #' 
 #' @examples
 #' data(mtcars)

@@ -67,21 +67,27 @@
   hammock-like adjustment for line widths.
 }
 \details{
-  Parallel sets have been suggested by Kosara et al (2006)
-  as a visualization technique to incorporate categorical
-  variables into a parallel coordinate plot (Wegman,
-  Inselberg reference). However, perceptual problems with
-  interpreting line widths, make this chart type a victim
-  of wrong conclusions. The hammock display (Schonlau 2003)
-  and the common angle plots are two approaches at fixing
-  this problem: in Hammock plots the linewidth is adjusted
-  by a factor countering the strength of the illusion, in
-  the common angle plot all lines are adjusted to show the
-  same angle - making line widths again comparable across
-  ribbons. Additionally, we can also adjust ribbons in the
-  common angle display for the angle, to make them appear
-  having the same width (or height) across the display. We
-  refer to this method as \code{adj.angle}.
+  Parallel sets have been suggested by \cite{Kosara et al.
+  (2006)} as a visualization technique to incorporate
+  categorical variables into a parallel coordinate plot
+  introduced by \cite{Wegman (1990)} and \cite{Inselberg
+  (1985)}. The parallel sets implemented here are reduced
+  to representations of neighboring two-dimensional
+  relationships only rather than the hierarchical version
+  originally suggested. Both versions, however, show
+  perceptual problems with interpreting line widths,
+  leading to potentially wrong conclusions about the data.
+  The hammock display, introduced by \cite{Schonlau
+  (2003)}, and the common angle plots are two approaches at
+  fixing this problem: in Hammock plots the linewidth is
+  adjusted by a factor countering the strength of the
+  illusion, in the common angle plot all lines are adjusted
+  to show the same angle - making line widths again
+  comparable across ribbons. Additionally, we can also
+  adjust ribbons in the common angle display for the angle,
+  to make them appear having the same width (or height)
+  across the display. We refer to this method as
+  \code{adj.angle}.
 }
 \examples{
 data(mtcars)
@@ -131,17 +137,25 @@ ggparallel(list("path", "chrom"), text.offset=c(0.03, 0,-0.03), data = genes,  w
 }
 }
 \references{
-  Matthias Schonlau (2003) Visualizing Categorical Data
-  Arising in the Health Sciences Using Hammock Plots. In
-  Proceedings of the Section on Statistical Graphics of the
-  American Statistical Association.
-  \url{http://www.schonlau.net/publication/03jsm_hammockplot.pdf}
+  Kosara R, Bendix F and Hauser H (2006). "Parallel Sets:
+  Interactive Exploration and Visual Analysis of
+  Categorical Data." _IEEE Transactions on Visualization
+  and Computer Graphics_, *12*(4), pp. 558-568. ISSN
+  1077-2626, <URL: http://dx.doi.org/10.1109/TVCG.2006.76>,
+  <URL: http://dx.doi.org/10.1109/TVCG.2006.76>.
 
-  Robert Kosara, Fabian Bendix, Helwig Hauser (2006)
-  Parallel Sets: Interactive Exploration and Visual
-  Analysis of Categorical Data, Transactions on
-  Visualization and Computer Graphics (TVCG), vol. 12, no.
-  4, pp. 558-568.
-  \url{http://kosara.net/papers/2006/Kosara_TVCG_2006.pdf}
+  Wegman EJ (1990). "Hyperdimensional Data Analysis Using
+  Parallel Coordinates." _Journal of the American
+  Statistical Association_, *85*(411), pp. pp. 664-675.
+  ISSN 01621459, <URL:
+  http://www.jstor.org/stable/2290001>.
+
+  Inselberg A (1985). "The Plane with Parallel
+  Coordinates." _The Visual Computer_, *1*(2), pp. 69-91.
+
+  Schonlau M (2003). "Visualizing Categorical Data Arising
+  in the Health Sciences Using Hammock Plots." In
+  _Proceedings of the Section on Statistical Graphics_.
+  RAND Corporation.
 }
 
