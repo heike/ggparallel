@@ -35,6 +35,10 @@
 #' ggparallel(list("gear", "cyl"), data=mtcars)
 #' ggparallel(list("gear", "cyl"), data=mtcars, method="hammock")
 #' 
+#' require(RColorBrewer)
+#' cols <- c(brewer.pal(4, "Reds")[-1], brewer.pal(4, "Blues")[-1])
+#' ggparallel(list("gear", "cyl"), data=mtcars, method="hammock", text.angle=0) + scale_fill_manual(values=cols) + scale_colour_manual(values=cols) + theme_bw()
+#' 
 #' ## combination of common angle plot and hammock adjustment:
 #' ggparallel(list("gear", "cyl"), data=mtcars, method="adj.angle")
 #' 
@@ -54,7 +58,12 @@
 #' ggparallel(names(titanic)[c(1,4,2,1)], order=0, titanic, weight="Freq") + 
 #'   scale_fill_brewer(palette="Paired", guide="none") + 
 #'   scale_colour_brewer(palette="Paired", guide="none")
-#'   
+#'
+#' cols <- c(brewer.pal(5,"Blues")[-1], brewer.pal(3, "Oranges")[-1], brewer.pal(3, "Greens")[-1])  
+#' ggparallel(names(titanic)[c(1,4,2,1)], order=0, titanic, weight="Freq") + 
+#'   scale_fill_manual(values=cols, guide="none") + 
+#'   scale_colour_manual(values=cols, guide="none") + theme_bw()
+#'    
 #' ## hammock plot with same width lines
 #' ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight=1, asp=0.5, method="hammock", ratio=0.2, order=c(0,0)) +
 #' theme( legend.position="none") + 
@@ -78,7 +87,7 @@
 #' }
 
 
-ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5, width = 0.25, order = 1,  ratio=0.2, asp = NULL, label = TRUE, text.angle=90, text.offset=NULL, color="white", ...) {
+ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5, width = 0.25, order = 1,  ratio=NULL, asp = NULL, label = TRUE, text.angle=90, text.offset=NULL, color="white", ...) {
   ### error checking
   vars <- unlist(vars)
   k = length(vars)
@@ -88,6 +97,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
   data$weight <- weight
   if (is.null(weight)) data$weight <- 1
   if (is.character(weight)) data$weight <- data[,weight]
+  if (is.null(ratio)) ratio <- nrow(data)/sum(data$weight)
   
   ## if ordering is selected, organize x and y axis by weight
   ## make order a vector of length length(vars)
@@ -253,7 +263,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
       
       r <- geom_ribbon(aes(x=as.numeric(variable)+offset+xid, 
                            ymin=y-width, ymax=y+width, group=id, 
-                           fill=Nodeset),  alpha=alpha, data=dfm) #, drop=FALSE)
+                           fill=Nodeset, colour=Nodeset),  alpha=alpha, data=dfm) #, drop=FALSE)
     }
     r
   }

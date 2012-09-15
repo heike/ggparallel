@@ -94,6 +94,10 @@ data(mtcars)
 ggparallel(list("gear", "cyl"), data=mtcars)
 ggparallel(list("gear", "cyl"), data=mtcars, method="hammock")
 
+require(RColorBrewer)
+cols <- c(brewer.pal(4, "Reds")[-1], brewer.pal(4, "Blues")[-1])
+ggparallel(list("gear", "cyl"), data=mtcars, method="hammock", text.angle=0) + scale_fill_manual(values=cols) + scale_colour_manual(values=cols) + theme_bw()
+
 ## combination of common angle plot and hammock adjustment:
 ggparallel(list("gear", "cyl"), data=mtcars, method="adj.angle")
 
@@ -113,6 +117,11 @@ titanic <- as.data.frame(Titanic)
 ggparallel(names(titanic)[c(1,4,2,1)], order=0, titanic, weight="Freq") +
   scale_fill_brewer(palette="Paired", guide="none") +
   scale_colour_brewer(palette="Paired", guide="none")
+
+cols <- c(brewer.pal(5,"Blues")[-1], brewer.pal(3, "Oranges")[-1], brewer.pal(3, "Greens")[-1])
+ggparallel(names(titanic)[c(1,4,2,1)], order=0, titanic, weight="Freq") +
+  scale_fill_manual(values=cols, guide="none") +
+  scale_colour_manual(values=cols, guide="none") + theme_bw()
 
 ## hammock plot with same width lines
 ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight=1, asp=0.5, method="hammock", ratio=0.2, order=c(0,0)) +
