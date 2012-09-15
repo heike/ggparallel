@@ -201,7 +201,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
       dfm3$x <- dfm3$x - dfm3$shiftx
       dfm <- rbind(dfm, dfm3[,-(16:17)])
       r <- geom_ribbon(aes(x=x,ymin=value -Freq, ymax= value, group=id, 
-                            fill=Nodeset), alpha=alpha, data=dfm)
+                            fill=Nodeset, colour=Nodeset), alpha=alpha, data=dfm)
     }
     if (method == "adj.angle") {     
       dfm$x <- with(dfm, as.numeric(variable)+offset+xid)
@@ -227,8 +227,9 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
 #      plot.asp <- length(vars)/(1.1*sum(data$weight))*asp
 #      qplot(x, ymid, data=dfm, geom=c("line"), alpha=I(0.5), group=id, colour=factor(gear), size=Freq)+scale_size(range=4.2*c(min(dfm$Freq),max(dfm$Freq))) + scale_colour_discrete() + theme(legend.position="none") + ylim(c(0, 1.05*sum(data$weight)))
 #browser()
-      r <- list(geom_line(aes(x=x,y=ymid, group=id, colour=Nodeset, size=Freq), alpha=alpha, data=dfm),
-        scale_size(guide="none", range=ratio*max(dfm$Freq)*c(min(dfm$Freq),max(dfm$Freq)))) #+ scale_colour_discrete()       
+      r <- list(geom_line(aes(x=x,y=ymid, group=id, colour=Nodeset, size=Freq), alpha=alpha, data=dfm), range=c(min(dfm$Freq),max(dfm$Freq)))
+      #      r <- list(geom_line(aes(x=x,y=ymid, group=id, colour=Nodeset, size=Freq), alpha=alpha, data=dfm),
+#        scale_size(guide="none", range=ratio*max(dfm$Freq)*c(min(dfm$Freq),max(dfm$Freq)))) #+ scale_colour_discrete()       
     }
     if (method=="hammock") {
       maxwidth = ratio/2*sum(data$weight)
@@ -243,9 +244,11 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
       dfm$varn <- as.numeric(dfm$variable)
       dfm <- transform(dfm, 
                        x = min(varn+offset+xid),
-                       xend = max(varn+offset+xid),
-                       tangens = max(midy)-min(midx)
+                       xend = max(varn+offset+xid)
                        )
+      dfm <- ddply(dfm , .(id), transform,
+        tangens = max(midy)-min(midx)
+      )    
       dfm$tangens <- with(dfm, tangens/max(xend-x)*plot.asp)
       dfm$width <- with(dfm, Freq/cos(atan(tangens)))
       dfm$width <- with(dfm, width*maxwidth/max(width))      
@@ -272,6 +275,14 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
   for (i in 1:(length(vars)-1))
     gr[[i]] <- getRibbons(i,i+1)
 
+  if (method=="adj.angle") {
+    prange <- c(NA,NA)
+    for (i in 1:(length(vars)-1)) {
+      prange <- range(c(prange, gr[[i]][[2]]), na.rm=T)
+      gr[[i]] <- gr[[i]][[1]]
+    }
+    gr[[1]] <-  list(gr[[1]], scale_size(guide="none", range=ratio*prange))
+  }
   subdata <- data[,c("weight", unlist(vars))]	
   dfm <- melt(subdata, id.var="weight")
   names(dfm)[3] <- "Nodeset"
