@@ -4,8 +4,9 @@
 \usage{
   ggparallel(vars = list(), data, weight = NULL,
     method = "angle", alpha = 0.5, width = 0.25, order = 1,
-    ratio = 0.2, asp = NULL, label = TRUE, text.angle = 90,
-    text.offset = NULL, color = "white", ...)
+    ratio = NULL, asp = NULL, label = TRUE,
+    text.angle = 90, text.offset = NULL, color = "white",
+    ...)
 }
 \arguments{
   \item{vars}{list of variable names to be included in the
@@ -108,39 +109,39 @@ ggparallel(list("gear", "cyl"), data=mtcars, method='parset')
 ggparallel(list("gear", "cyl"), data=mtcars, text.angle=0) + coord_flip()
 
 ## change colour scheme
-ggparallel(list("gear", "cyl"), data=mtcars, text.angle=0) + coord_flip() +
-  scale_fill_brewer(palette="Set1") +
+ggparallel(list("gear", "cyl"), data=mtcars, text.angle=0) + coord_flip() + 
+  scale_fill_brewer(palette="Set1") + 
   scale_colour_brewer(palette="Set1")
-
+  
 ## example with more than two variables:
 titanic <- as.data.frame(Titanic)
-ggparallel(names(titanic)[c(1,4,2,1)], order=0, titanic, weight="Freq") +
-  scale_fill_brewer(palette="Paired", guide="none") +
+ggparallel(names(titanic)[c(1,4,2,1)], order=0, titanic, weight="Freq") + 
+  scale_fill_brewer(palette="Paired", guide="none") + 
   scale_colour_brewer(palette="Paired", guide="none")
 
-cols <- c(brewer.pal(5,"Blues")[-1], brewer.pal(3, "Oranges")[-1], brewer.pal(3, "Greens")[-1])
-ggparallel(names(titanic)[c(1,4,2,1)], order=0, titanic, weight="Freq") +
-  scale_fill_manual(values=cols, guide="none") +
+cols <- c(brewer.pal(5,"Blues")[-1], brewer.pal(3, "Oranges")[-1], brewer.pal(3, "Greens")[-1])  
+ggparallel(names(titanic)[c(1,4,2,1)], order=0, titanic, weight="Freq") + 
+  scale_fill_manual(values=cols, guide="none") + 
   scale_colour_manual(values=cols, guide="none") + theme_bw()
-
+   
 ## hammock plot with same width lines
 ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight=1, asp=0.5, method="hammock", ratio=0.2, order=c(0,0)) +
-theme( legend.position="none") +
-scale_fill_brewer(palette="Paired") +
+theme( legend.position="none") + 
+scale_fill_brewer(palette="Paired") + 
 scale_colour_brewer(palette="Paired")
 
 ## hammock plot with line widths adjusted by frequency
-ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight="Freq", asp=0.5, method="hammock", order=c(0,0)) +
+ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight="Freq", asp=0.5, method="hammock", order=c(0,0)) + 
 theme( legend.position="none")
 
-\dontrun{
+\\dontrun{
 ## biological examples: genes and pathways
 data(genes)
 genes$chrom <- factor(genes$chrom, levels=c(paste("chr", 1:22, sep=""), "chrX", "chrY"))
 ggparallel(list("path", "chrom"), text.offset=c(0.03, 0,-0.03), data = genes,  width=0.1, order=c(1,0), text.angle=0, color="white",
-   factorlevels =  c(sapply(unique(genes$chrom), as.character),
-     unique(genes$path))) +
-   scale_fill_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") +
+   factorlevels =  c(sapply(unique(genes$chrom), as.character), 
+     unique(genes$path))) + 
+   scale_fill_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") + 
    scale_colour_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") +
    coord_flip()
 }

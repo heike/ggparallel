@@ -15,6 +15,7 @@ Depends:
     plyr
 Suggests:
     RColorBrewer
+URL: http://github.com/heike/ggparallel
 Collate:
     'help.R'
     'genes.R'
