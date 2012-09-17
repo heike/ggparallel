@@ -129,7 +129,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5
       r <- geom_ribbon(aes(x=as.numeric(variable)+offset+xid,
                            ymin=value -Freq, 
                            ymax= value, group=id, 
-                      fill=Nodeset),	alpha=alpha, data=dfm)
+                      fill=Nodeset, colour=Nodeset),	alpha=alpha, data=dfm)
     }
     if (method == "angle") {     
       dfm$x <- with(dfm, as.numeric(variable)+offset+xid)
