@@ -24,7 +24,7 @@
 #' @param text.angle numeric value in degrees, by which text for labelling is rotated. Ignored if label = FALSE
 #' @param text.offset (vector) of values for offset the labels
 #' @param asp aspect ratio of the plot - it will be set to a default of 1 in the case of hammock plots.
-#' @param color value used for color of the boxes.
+# @param color value used for color of the boxes.
 #' @param ... passed on directly to all of the ggplot2 commands
 #' @return returns a  ggplot2 object that can be plotted directly or used as base layer for additional modifications.
 #' @export
@@ -32,7 +32,7 @@
 #' 
 #' @example inst/examples/ggparallel-ex.R
 
-ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5, width = 0.25, order = 1,  ratio=NULL, asp = NULL, label = TRUE, text.angle=90, text.offset=NULL, color="white", ...) {
+ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5, width = 0.25, order = 1,  ratio=NULL, asp = NULL, label = TRUE, text.angle=90, text.offset=NULL, ...) {
   ### error checking
   vars <- unlist(vars)
   k = length(vars)
