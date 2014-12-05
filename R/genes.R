@@ -19,7 +19,8 @@
 #' D109-D114 (2012) \cr \cr Kanehisa, M. and Goto, S.; KEGG: Kyoto Encyclopedia
 #' of Genes and Genomes. Nucleic Acids Res. 28, 27-30 (2000).
 #' @examples
-#' require(RColorBrewer)
+#' library(ggplot2)
+#' library(RColorBrewer)
 #' genes$chrom <- factor(genes$chrom, levels=c(paste("chr", 1:22, sep=""),
 #'   "chrX", "chrY"))
 #' ggparallel(

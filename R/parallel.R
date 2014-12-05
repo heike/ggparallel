@@ -51,6 +51,7 @@
 #' @return returns a  ggplot2 object that can be plotted directly or used as base
 #'  layer for additional modifications.
 #' @export
+#' @import ggplot2 plyr reshape2
 ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
                        alpha=0.5, width = 0.25, order = 1,  ratio=NULL,
                        asp = NULL, label = TRUE, text.angle=90,

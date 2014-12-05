@@ -30,8 +30,10 @@ PATHWAY database. Bioconductor package KEGG.db was used to provide mappings
 between gene and pathway identifiers.
 }
 \examples{
-require(RColorBrewer)
-genes$chrom <- factor(genes$chrom, levels=c(paste("chr", 1:22, sep=""), "chrX", "chrY"))
+library(ggplot2)
+library(RColorBrewer)
+genes$chrom <- factor(genes$chrom, levels=c(paste("chr", 1:22, sep=""),
+  "chrX", "chrY"))
 ggparallel(
   list("path", "chrom"),
   text.offset = c(0.03, 0,-0.03),
