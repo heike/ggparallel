@@ -3,11 +3,31 @@
 \name{genes}
 \alias{genes}
 \title{Data linking genes and pathways.}
+\format{\preformatted{'data.frame':	2768 obs. of  14 variables:
+ $ value     : int  9 9 9 9 9 9 9 9 10 10 ...
+ $ name      : Factor w/ 59950 levels "uc001aab.2","uc001aac.2",..: 43054 43058 43053 43055 43056 43057 58586 58587 58588 43059 ...
+ $ chrom     : Factor w/ 24 levels "chr1","chr10",..: 21 21 21 21 21 21 21 21 21 21 ...
+ $ strand    : Factor w/ 2 levels "-","+": 2 2 2 2 2 2 2 2 2 2 ...
+ $ txStart   : int  18111894 18113073 18111894 18111894 18113073 18113073 18113073 18123836 18301793 18293034 ...
+ $ txEnd     : int  18125100 18125100 18125100 18125100 18125100 18125100 18125100 18124709 18302666 18303003 ...
+ $ cdsStart  : int  18123836 18123836 18123836 18118682 18118682 18123836 18123836 18123836 18301793 18301793 ...
+ $ cdsEnd    : int  18124709 18124709 18124709 18124709 18124709 18124709 18124709 18124709 18302666 18302666 ...
+ $ exonCount : int  4 4 3 4 4 4 3 1 1 2 ...
+ $ exonStarts: Factor w/ 64524 levels "0,1137,5766,12786,",..: 19845 19848 19847 19846 19849 19848 19850 19868 20093 20084 ...
+ $ exonEnds  : Factor w/ 64568 levels "100000370,100002888,100004625,100007887,100009499,100010117,",..: 19917 19920 19919 19918 19922 19921 19923 19944 20170 20161 ...
+ $ proteinID : Factor w/ 36856 levels "","A0A183","A0A4V9",..: 13218 13218 13218 23139 23139 13218 13218 13218 694 694 ...
+ $ alignID   : Factor w/ 66803 levels "uc001aaa.2","uc001aab.2",..: 48418 48422 48417 48419 48420 48421 65330 65331 65332 48423 ...
+ $ path      : chr  "hsa00232" "hsa00232" "hsa00232" "hsa00232" ...
+}}
+\usage{
+genes
+}
 \description{
-Table knownGene from track UCSC Genes was downloaded from the UCSC table browser for the
-human genome assembly (hg18, May 2006) and filtered for a selection of pathways associated with
-human metabolism was obtained from KEGG PATHWAY database. Bioconductor package KEGG.db was used to provide
-mappings between gene and pathway identifiers.
+Table knownGene from track UCSC Genes was downloaded from the UCSC table
+browser for the human genome assembly (hg18, May 2006) and filtered for a
+selection of pathways associated with human metabolism was obtained from KEGG
+PATHWAY database. Bioconductor package KEGG.db was used to provide mappings
+between gene and pathway identifiers.
 }
 \examples{
 data(genes)
@@ -20,18 +40,19 @@ ggparallel(list("path", "chrom"), text.offset=c(0.03, 0,-0.03), data = genes,  w
    scale_colour_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") +
    coord_flip()
 }
-\author{
-Marie Vendettuoli \email{mariecv26@gmail.com}
-}
 \references{
-Fujita PA, Rhead B, Zweig AS, Hinrichs AS, Karolchik D, Cline MS, Goldman M, Barber GP,
-Clawson H, Coelho A, Diekhans M, Dreszer TR, Giardine BM, Harte RA, Hillman-Jackson J, Hsu F, Kirkup V,
-Kuhn RM, Learned K, Li CH, Meyer LR, Pohl A, Raney BJ, Rosenbloom KR, Smith KE, Haussler D, Kent WJ.
-The UCSC Genome Browser database: update 2011. Nucleic Acids Res. 2010 Oct 18. \url{http://genome.ucsc.edu/index.html?org=Human&db=hg19&hgsid=289810087} \cr \cr
-Marc Carlson, Seth Falcon, Herve Pages and Nianhua Li (). KEGG.db: A set of annotation
-maps for KEGG. R package version 2.6.1. \cr \cr
-Kanehisa, M., Goto, S., Sato, Y., Furumichi, M., and Tanabe, M.; KEGG for integration and interpretation of large-scale molecular datasets. Nucleic Acids Res. 40, D109-D114 (2012) \cr \cr
-Kanehisa, M. and Goto, S.; KEGG: Kyoto Encyclopedia of Genes and Genomes. Nucleic Acids Res. 28, 27-30 (2000).
+Fujita PA, Rhead B, Zweig AS, Hinrichs AS, Karolchik D, Cline MS,
+Goldman M, Barber GP, Clawson H, Coelho A, Diekhans M, Dreszer TR, Giardine
+BM, Harte RA, Hillman-Jackson J, Hsu F, Kirkup V, Kuhn RM, Learned K, Li CH,
+Meyer LR, Pohl A, Raney BJ, Rosenbloom KR, Smith KE, Haussler D, Kent WJ. The
+UCSC Genome Browser database: update 2011. Nucleic Acids Res. 2010 Oct 18.
+\url{http://genome.ucsc.edu/index.html?org=Human&db=hg19&hgsid=289810087} \cr
+\cr Marc Carlson, Seth Falcon, Herve Pages and Nianhua Li (). KEGG.db: A set
+of annotation maps for KEGG. R package version 2.6.1. \cr \cr Kanehisa, M.,
+Goto, S., Sato, Y., Furumichi, M., and Tanabe, M.; KEGG for integration and
+interpretation of large-scale molecular datasets. Nucleic Acids Res. 40,
+D109-D114 (2012) \cr \cr Kanehisa, M. and Goto, S.; KEGG: Kyoto Encyclopedia
+of Genes and Genomes. Nucleic Acids Res. 28, 27-30 (2000).
 }
-\keyword{data}
+\keyword{datasets}
 

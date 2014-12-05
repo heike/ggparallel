@@ -1,34 +1,60 @@
 #' Variations of parallel coordinate plots
 #'
-#' \code{\link{ggparallel}} implements and combines different types of parallel coordinate plots for
-#' categorical data:
-#' hammock plots,  parallel sets plots, common angle plots, and common angle plots with a hammock-like adjustment for line widths.
+#' \code{\link{ggparallel}} implements and combines different types of parallel
+#' coordinate plots for categorical data: hammock plots,  parallel sets plots,
+#' common angle plots, and common angle plots with a hammock-like adjustment
+#' for line widths.
 #'
-#' Parallel sets have been suggested by \cite{kosara:2006} as a visualization technique to incorporate categorical variables into
-#' a parallel coordinate plot introduced by \cite{wegman:1990} and \cite{inselberg:1985}. The parallel sets implemented here are reduced to representations of neighboring two-dimensional relationships only rather than the hierarchical version originally suggested.
-#' Both versions,
-#' however, show perceptual problems with interpreting line widths, leading to potentially wrong conclusions about the data.
-#' The  hammock display, introduced by \cite{schonlau:2003}, and the common angle plots are two approaches at fixing this problem: in Hammock plots the linewidth is adjusted by a factor countering
-#' the strength of the illusion, in the common angle plot all lines are adjusted to show the same angle - making line widths again comparable across ribbons. Additionally, we can also adjust ribbons
-#' in the common angle display for the angle, to make them appear having the same width (or height) across the display. We refer to this method as \code{adj.angle}.
+#' Parallel sets have been suggested by \cite{kosara:2006} as a visualization
+#' technique to incorporate categorical variables into a parallel coordinate
+#' plot introduced by \cite{wegman:1990} and \cite{inselberg:1985}. The parallel
+#' sets implemented here are reduced to representations of neighboring
+#' two-dimensional relationships only rather than the hierarchical version
+#' originally suggested.
 #'
-#' @param vars list of variable names to be included in the plotting. order of the variables is preserved in the display
+#' Both versions, however, show perceptual problems with interpreting line
+#' widths, leading to potentially wrong conclusions about the data. The hammock
+#' display, introduced by \cite{schonlau:2003}, and the common angle plots are
+#' two approaches at fixing this problem: in Hammock plots the linewidth is
+#' adjusted by a factor countering the strength of the illusion, in the common
+#' angle plot all lines are adjusted to show the same angle - making line widths
+#' again comparable across ribbons.
+#'
+#' Additionally, we can also adjust ribbons in the common angle display for the
+#' angle, to make them appear having the same width (or height) across the
+#' display. We refer to this method as \code{adj.angle}.
+#'
+#' @param vars list of variable names to be included in the plotting. Order of
+#'  the variables is preserved in the display
 #' @param data data frame
 #' @param weight weighting variable - use character string
-#' @param method plotting method to use - one of \code{angle}, \code{adj.angle}, \code{parset},  or \code{hammock}, for a hammock plot the aspect ratio needs to be fixed.
-#' @param alpha level of alpha blending for the fill color in ribbons, value has to be between 0 and 1, defaults to 0.5.
+#' @param method plotting method to use - one of \code{angle},
+#'    \code{adj.angle}, \code{parset},  or \code{hammock}, for a hammock plot
+#'    the aspect ratio needs to be fixed.
+#' @param alpha level of alpha blending for the fill color in ribbons, value
+#'    has to be between 0 and 1, defaults to 0.5.
 #' @param width width of variables
-#' @param order flag variable with three levels -1, 0, 1 for levels in decreasing order, levels in increasing order and levels unchanged. This variable can be either a scalar or a vector
-#' @param ratio  used for methods with angle adjustments (method = \code{'hammock', 'adj.angle'}): specifies the height (width for horizontal displays) of the widest line as ratio of the overall display height (width for horizontal displays).
+#' @param order flag variable with three levels -1, 0, 1 for levels in
+#'    decreasing order, levels in increasing order and levels unchanged. This
+#'    variable can be either a scalar or a vector
+#' @param ratio  used for methods with angle adjustments (method =
+#'   \code{'hammock', 'adj.angle'}): specifies the height (width for horizontal
+#'   displays) of the widest line as ratio of the overall display height (width
+#'   for horizontal displays).
 #' @param label binary variable (vector), whether labels should be shown.
-#' @param text.angle numeric value in degrees, by which text for labelling is rotated. Ignored if label = FALSE
+#' @param text.angle numeric value in degrees, by which text for labelling is
+#'   rotated. Ignored if label = FALSE
 #' @param text.offset (vector) of values for offset the labels
-#' @param asp aspect ratio of the plot - it will be set to a default of 1 in the case of hammock plots.
-# @param color value used for color of the boxes.
+#' @param asp aspect ratio of the plot - it will be set to a default of 1 in
+#'   the case of hammock plots.
 #' @param ... passed on directly to all of the ggplot2 commands
-#' @return returns a  ggplot2 object that can be plotted directly or used as base layer for additional modifications.
+#' @return returns a  ggplot2 object that can be plotted directly or used as base
+#'  layer for additional modifications.
 #' @export
-ggparallel <- function(vars=list(), data, weight=NULL, method="angle", alpha=0.5, width = 0.25, order = 1,  ratio=NULL, asp = NULL, label = TRUE, text.angle=90, text.offset=NULL, ...) {
+ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
+                       alpha=0.5, width = 0.25, order = 1,  ratio=NULL,
+                       asp = NULL, label = TRUE, text.angle=90,
+                       text.offset=NULL, ...) {
   ### error checking
   vars <- unlist(vars)
   k = length(vars)

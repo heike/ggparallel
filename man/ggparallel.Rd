@@ -8,47 +8,71 @@ ggparallel(vars = list(), data, weight = NULL, method = "angle",
   label = TRUE, text.angle = 90, text.offset = NULL, ...)
 }
 \arguments{
-\item{vars}{list of variable names to be included in the plotting. order of the variables is preserved in the display}
+\item{vars}{list of variable names to be included in the plotting. Order of
+the variables is preserved in the display}
 
 \item{data}{data frame}
 
 \item{weight}{weighting variable - use character string}
 
-\item{method}{plotting method to use - one of \code{angle}, \code{adj.angle}, \code{parset},  or \code{hammock}, for a hammock plot the aspect ratio needs to be fixed.}
+\item{method}{plotting method to use - one of \code{angle},
+\code{adj.angle}, \code{parset},  or \code{hammock}, for a hammock plot
+the aspect ratio needs to be fixed.}
 
-\item{alpha}{level of alpha blending for the fill color in ribbons, value has to be between 0 and 1, defaults to 0.5.}
+\item{alpha}{level of alpha blending for the fill color in ribbons, value
+has to be between 0 and 1, defaults to 0.5.}
 
 \item{width}{width of variables}
 
-\item{order}{flag variable with three levels -1, 0, 1 for levels in decreasing order, levels in increasing order and levels unchanged. This variable can be either a scalar or a vector}
+\item{order}{flag variable with three levels -1, 0, 1 for levels in
+decreasing order, levels in increasing order and levels unchanged. This
+variable can be either a scalar or a vector}
 
-\item{ratio}{used for methods with angle adjustments (method = \code{'hammock', 'adj.angle'}): specifies the height (width for horizontal displays) of the widest line as ratio of the overall display height (width for horizontal displays).}
+\item{ratio}{used for methods with angle adjustments (method =
+\code{'hammock', 'adj.angle'}): specifies the height (width for horizontal
+displays) of the widest line as ratio of the overall display height (width
+for horizontal displays).}
 
-\item{asp}{aspect ratio of the plot - it will be set to a default of 1 in the case of hammock plots.}
+\item{asp}{aspect ratio of the plot - it will be set to a default of 1 in
+the case of hammock plots.}
 
 \item{label}{binary variable (vector), whether labels should be shown.}
 
-\item{text.angle}{numeric value in degrees, by which text for labelling is rotated. Ignored if label = FALSE}
+\item{text.angle}{numeric value in degrees, by which text for labelling is
+rotated. Ignored if label = FALSE}
 
 \item{text.offset}{(vector) of values for offset the labels}
 
 \item{...}{passed on directly to all of the ggplot2 commands}
 }
 \value{
-returns a  ggplot2 object that can be plotted directly or used as base layer for additional modifications.
+returns a  ggplot2 object that can be plotted directly or used as base
+ layer for additional modifications.
 }
 \description{
-\code{\link{ggparallel}} implements and combines different types of parallel coordinate plots for
-categorical data:
-hammock plots,  parallel sets plots, common angle plots, and common angle plots with a hammock-like adjustment for line widths.
+\code{\link{ggparallel}} implements and combines different types of parallel
+coordinate plots for categorical data: hammock plots,  parallel sets plots,
+common angle plots, and common angle plots with a hammock-like adjustment
+for line widths.
 }
 \details{
-Parallel sets have been suggested by \cite{kosara:2006} as a visualization technique to incorporate categorical variables into
-a parallel coordinate plot introduced by \cite{wegman:1990} and \cite{inselberg:1985}. The parallel sets implemented here are reduced to representations of neighboring two-dimensional relationships only rather than the hierarchical version originally suggested.
-Both versions,
-however, show perceptual problems with interpreting line widths, leading to potentially wrong conclusions about the data.
-The  hammock display, introduced by \cite{schonlau:2003}, and the common angle plots are two approaches at fixing this problem: in Hammock plots the linewidth is adjusted by a factor countering
-the strength of the illusion, in the common angle plot all lines are adjusted to show the same angle - making line widths again comparable across ribbons. Additionally, we can also adjust ribbons
-in the common angle display for the angle, to make them appear having the same width (or height) across the display. We refer to this method as \code{adj.angle}.
+Parallel sets have been suggested by \cite{kosara:2006} as a visualization
+technique to incorporate categorical variables into a parallel coordinate
+plot introduced by \cite{wegman:1990} and \cite{inselberg:1985}. The parallel
+sets implemented here are reduced to representations of neighboring
+two-dimensional relationships only rather than the hierarchical version
+originally suggested.
+
+Both versions, however, show perceptual problems with interpreting line
+widths, leading to potentially wrong conclusions about the data. The hammock
+display, introduced by \cite{schonlau:2003}, and the common angle plots are
+two approaches at fixing this problem: in Hammock plots the linewidth is
+adjusted by a factor countering the strength of the illusion, in the common
+angle plot all lines are adjusted to show the same angle - making line widths
+again comparable across ribbons.
+
+Additionally, we can also adjust ribbons in the common angle display for the
+angle, to make them appear having the same width (or height) across the
+display. We refer to this method as \code{adj.angle}.
 }
 
