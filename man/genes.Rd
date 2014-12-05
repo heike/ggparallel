@@ -60,13 +60,17 @@ Goldman M, Barber GP, Clawson H, Coelho A, Diekhans M, Dreszer TR, Giardine
 BM, Harte RA, Hillman-Jackson J, Hsu F, Kirkup V, Kuhn RM, Learned K, Li CH,
 Meyer LR, Pohl A, Raney BJ, Rosenbloom KR, Smith KE, Haussler D, Kent WJ. The
 UCSC Genome Browser database: update 2011. Nucleic Acids Res. 2010 Oct 18.
-\url{http://genome.ucsc.edu/index.html?org=Human&db=hg19&hgsid=289810087} \cr
-\cr Marc Carlson, Seth Falcon, Herve Pages and Nianhua Li (). KEGG.db: A set
-of annotation maps for KEGG. R package version 2.6.1. \cr \cr Kanehisa, M.,
-Goto, S., Sato, Y., Furumichi, M., and Tanabe, M.; KEGG for integration and
-interpretation of large-scale molecular datasets. Nucleic Acids Res. 40,
-D109-D114 (2012) \cr \cr Kanehisa, M. and Goto, S.; KEGG: Kyoto Encyclopedia
-of Genes and Genomes. Nucleic Acids Res. 28, 27-30 (2000).
+\url{http://genome.ucsc.edu/index.html?org=Human&db=hg19&hgsid=289810087}
+
+Marc Carlson, Seth Falcon, Herve Pages and Nianhua Li (). KEGG.db: A set
+of annotation maps for KEGG. R package version 2.6.1.
+
+Kanehisa, M., Goto, S., Sato, Y., Furumichi, M., and Tanabe, M.; KEGG for
+integration and interpretation of large-scale molecular datasets. Nucleic
+Acids Res. 40, D109-D114 (2012)
+
+Kanehisa, M. and Goto, S.; KEGG: Kyoto Encyclopedia of Genes and Genomes.
+Nucleic Acids Res. 28, 27-30 (2000).
 }
 \keyword{datasets}
 
