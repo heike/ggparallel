@@ -16,3 +16,4 @@ Depends:
 Suggests:
     RColorBrewer
 URL: http://github.com/heike/ggparallel
+LazyData: true
