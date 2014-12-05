@@ -19,13 +19,26 @@
 #' D109-D114 (2012) \cr \cr Kanehisa, M. and Goto, S.; KEGG: Kyoto Encyclopedia
 #' of Genes and Genomes. Nucleic Acids Res. 28, 27-30 (2000).
 #' @examples
-#' data(genes)
 #' require(RColorBrewer)
-#' genes$chrom <- factor(genes$chrom, levels=c(paste("chr", 1:22, sep=""), "chrX", "chrY"))
-#' ggparallel(list("path", "chrom"), text.offset=c(0.03, 0,-0.03), data = genes,  width=0.1, order=c(1,0), angle=0, color="white",
-#'    factorlevels =  c(sapply(unique(genes$chrom), as.character),
-#'      unique(genes$path))) +
-#'    scale_fill_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") +
-#'    scale_colour_manual(values = c(   brewer.pal("YlOrRd", n = 9), rep("grey80", 24)), guide="none") +
-#'    coord_flip()
+#' genes$chrom <- factor(genes$chrom, levels=c(paste("chr", 1:22, sep=""),
+#'   "chrX", "chrY"))
+#' ggparallel(
+#'   list("path", "chrom"),
+#'   text.offset = c(0.03, 0,-0.03),
+#'   data = genes,
+#'   width = 0.1,
+#'   order = c(1, 0),
+#'   angle = 0,
+#'   color = "white",
+#'   factorlevels =  c(sapply(unique(genes$chrom), as.character),unique(genes$path))
+#' ) +
+#'  scale_fill_manual(
+#'    values = c(brewer.pal("YlOrRd", n = 9), rep("grey80", 24)),
+#'    guide = "none"
+#'  ) +
+#'  scale_colour_manual(
+#'    values = c(brewer.pal("YlOrRd", n = 9), rep("grey80", 24)),
+#'    guide = "none"
+#'  ) +
+#'  coord_flip()
 "genes"
