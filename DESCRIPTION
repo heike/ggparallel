@@ -1,13 +1,11 @@
 Package: ggparallel
-Type: Package
-Title: Variations of Parallel Coordinate Plots for Categorical Data
 Version: 0.1.1
-Date: 2012-08-17
+Title: Variations of Parallel Coordinate Plots for Categorical Data
 Author: Heike Hofmann, Marie Vendettuoli
 Maintainer: Heike Hofmann <hofmann@iastate.edu>
-Description: R package for creating hammock plots, parallel sets, and common
-    angle plots using the ggplot2 framework.
-License: MIT
+Description: Create hammock plots, parallel sets, and common angle plots
+    with ggplot2.
+License: MIT + file LICENSE
 Depends:
     R (>= 2.10.0),
     ggplot2 (>= 0.9.2),
