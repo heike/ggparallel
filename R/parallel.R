@@ -139,7 +139,6 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
 
     dfxy$XX <- dfxy[,xname]
     dfxy$YY <- dfxy[,yname]
-
     dfm$Nodeset <- dfm[,xname]
     dfm$Nodeset <- factor(dfm$Nodeset, levels=llist)
 
