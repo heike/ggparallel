@@ -6,7 +6,8 @@
 \usage{
 ggparallel(vars = list(), data, weight = NULL, method = "angle",
   alpha = 0.5, width = 0.25, order = 1, ratio = NULL, asp = NULL,
-  label = TRUE, text.angle = 90, text.offset = NULL, ...)
+  label = TRUE, label.size = 4, text.angle = 90, text.offset = NULL,
+  ...)
 }
 \arguments{
 \item{vars}{list of variable names to be included in the plotting. Order of
@@ -38,6 +39,8 @@ for horizontal displays).}
 the case of hammock plots.}
 
 \item{label}{binary variable (vector), whether labels should be shown.}
+
+\item{label.size}{numeric value to determine the size in which labels are shown, defaults to 4}
 
 \item{text.angle}{numeric value in degrees, by which text for labelling is
 rotated. Ignored if label = FALSE}
