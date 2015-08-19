@@ -42,6 +42,7 @@
 #'   displays) of the widest line as ratio of the overall display height (width
 #'   for horizontal displays).
 #' @param label binary variable (vector), whether labels should be shown.
+#' @param label.size numeric value to determine the size in which labels are shown, defaults to 4
 #' @param text.angle numeric value in degrees, by which text for labelling is
 #'   rotated. Ignored if label = FALSE
 #' @param text.offset (vector) of values for offset the labels
@@ -54,7 +55,7 @@
 #' @import ggplot2 plyr reshape2
 ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
                        alpha=0.5, width = 0.25, order = 1,  ratio=NULL,
-                       asp = NULL, label = TRUE, text.angle=90,
+                       asp = NULL, label = TRUE, label.size=4, text.angle=90,
                        text.offset=NULL, ...) {
   ### error checking
   vars <- unlist(vars)
@@ -276,9 +277,9 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
 	  varnames <- paste(unlist(vars), sep="|", collapse="|")
 	  label.stats$labels <- gsub(sprintf("(%s):(.*)",varnames),"\\2", as.character(label.stats$Nodeset))
     llabels <- list(geom_text(aes(x=as.numeric(variable)+text.offset, y=ypos, label=labels),
-	                      colour = "grey20", data=label.stats, angle=text.angle, size=4),
+	                      colour = "grey20", data=label.stats, angle=text.angle, size=label.size),
 	                  geom_text(aes(x=as.numeric(variable)+0.01+text.offset, y=ypos-0.01, label=labels),
-	                      colour = "grey90", data=label.stats, angle=text.angle, size=4))
+	                      colour = "grey90", data=label.stats, angle=text.angle, size=label.size))
   }
   theme.layer <- NULL
   if (!is.null(asp)) theme.layer <- theme(aspect.ratio=asp)

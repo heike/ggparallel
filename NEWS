@@ -8,3 +8,8 @@ Version 0.1.1
 * renamed parameter angle to text.angle
 * removed colour from outline of common angle ribbons
 * bug fix: order of variables considered in drawing ribbons for hammock plots
+------------------------------------------------------------
+Version 0.1.2
+------------------------------------------------------------
+* removed the Rproj file from the package
+* added parameter label.size

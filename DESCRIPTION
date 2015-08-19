@@ -1,5 +1,5 @@
 Package: ggparallel
-Version: 0.1.1
+Version: 0.1.2
 Title: Variations of Parallel Coordinate Plots for Categorical Data
 Author: Heike Hofmann, Marie Vendettuoli
 Maintainer: Heike Hofmann <hofmann@iastate.edu>
