@@ -11,8 +11,7 @@ Depends:
 Imports:
     ggplot2 (>= 0.9.2),
     reshape2,
-    plyr,
-    stats
+    plyr
 Suggests:
     RColorBrewer
 URL: http://github.com/heike/ggparallel

@@ -134,7 +134,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
 
     ## assign row number as id
     dfxy$id <- 1:nrow(dfxy)
-
+browser()
     dfm <- melt(dfxy, measure.var=c("X", "Y"))
     levels(dfm$variable) <- c(x,y)
 
