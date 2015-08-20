@@ -76,7 +76,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
   		data[,vars[i]] <- factor(data[,vars[i]])
 
     if (order[i] != 0)
-      data[,vars[i]] <- reorder(data[,vars[i]], data$weight,
+      data[,vars[i]] <- stats::reorder(data[,vars[i]], data$weight,
                              function(x) if (order[i] > 0) sum(x)
                              			 else -sum(x)
                              )
@@ -115,7 +115,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
     ymid <- NULL
 
     ## create the data table, x, y, and weight
-    dfxy <- as.data.frame(xtabs(data$weight~data[,x] + data[,y]))
+    dfxy <- as.data.frame(stats::xtabs(data$weight~data[,x] + data[,y]))
     dfxy <- subset(dfxy, Freq > 0)
 
     names(dfxy)[1:2] <- c(xname, yname)
@@ -134,7 +134,6 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
 
     ## assign row number as id
     dfxy$id <- 1:nrow(dfxy)
-browser()
     dfm <- melt(dfxy, measure.var=c("X", "Y"))
     levels(dfm$variable) <- c(x,y)
 
