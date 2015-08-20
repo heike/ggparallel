@@ -256,7 +256,9 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
     }
     gr[[1]] <-  list(gr[[1]], scale_size(guide="none", range=ratio*prange))
   }
+
   subdata <- data[,c("weight", unlist(vars))]
+  for (i in unlist(vars)) subdata[,i] <- as.character(subdata[,i])
   dfm <- melt(subdata, id.var="weight")
   names(dfm)[3] <- "Nodeset"
   dfm$Nodeset <- factor(dfm$Nodeset, levels=llist)
