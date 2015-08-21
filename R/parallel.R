@@ -113,6 +113,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
     ymax <- NULL
     ymin <- NULL
     ymid <- NULL
+    xoffset <- NULL
 
     ## create the data table, x, y, and weight
     dfxy <- as.data.frame(stats::xtabs(data$weight~data[,x] + data[,y]))
@@ -142,19 +143,18 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
     dfm$Nodeset <- dfm[,xname]
     dfm$Nodeset <- factor(dfm$Nodeset, levels=llist)
 
-    dfm$offset <- c(width/2,-width/2)[as.numeric(dfm$variable)]
+    dfm$xoffset <- c(width/2,-width/2)[as.numeric(dfm$variable)]
     dfm$xid <- xid - 1
     dfm$yid <- yid
 
-
     if (method=="parset") {
-      r <- geom_ribbon(aes(x=as.numeric(variable)+offset+xid,
+      r <- geom_ribbon(aes(x=as.numeric(variable)+xoffset+xid,
                            ymin=value -Freq,
                            ymax= value, group=id,
                       fill=Nodeset, colour=Nodeset),	alpha=alpha, data=dfm)
     }
     if (method == "angle") {
-      dfm$x <- with(dfm, as.numeric(variable)+offset+xid)
+      dfm$x <- with(dfm, as.numeric(variable)+xoffset+xid)
       dfm<- ddply(dfm, .(id), transform,
                   dx=max(x)-min(x),
                   dy=max(value) -min(value)
@@ -164,8 +164,8 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
       dfm$newdx <- with(dfm, dy/maxslope)
 
       dfm2 <- dfm
-      dfm2$offset <- with(dfm, (abs(offset) + (dx-newdx)/2) * sign(offset))
-      dfm2$x <- with(dfm2, as.numeric(variable)+offset+xid)
+      dfm2$xoffset <- with(dfm, (abs(xoffset) + (dx-newdx)/2) * sign(xoffset))
+      dfm2$x <- with(dfm2, as.numeric(variable)+xoffset+xid)
       dfm3 <- ddply(dfm2, names(dfm2)[2], transform,
                     dx2 = max(x[which(tangens==max(tangens))])
       )
@@ -176,7 +176,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
                             fill=Nodeset, colour=Nodeset), alpha=alpha, data=dfm)
     }
     if (method == "adj.angle") {
-      dfm$x <- with(dfm, as.numeric(variable)+offset+xid)
+      dfm$x <- with(dfm, as.numeric(variable)+xoffset+xid)
       dfm<- ddply(dfm, .(id), transform,
                   dx=max(x)-min(x),
                   dy=max(value) -min(value)
@@ -186,8 +186,8 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
       dfm$newdx <- with(dfm, dy/maxslope)
 
       dfm2 <- dfm
-      dfm2$offset <- with(dfm, (abs(offset) + (dx-newdx)/2) * sign(offset))
-      dfm2$x <- with(dfm2, as.numeric(variable)+offset+xid)
+      dfm2$xoffset <- with(dfm, (abs(xoffset) + (dx-newdx)/2) * sign(xoffset))
+      dfm2$x <- with(dfm2, as.numeric(variable)+xoffset+xid)
       dfm3 <- ddply(dfm2, names(dfm2)[2], transform,
                     dx2 = max(x[which(tangens==max(tangens))])
       )
@@ -215,8 +215,8 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
 
       dfm$varn <- as.numeric(dfm$variable)
       dfm <- transform(dfm,
-                       x = min(varn+offset+xid),
-                       xend = max(varn+offset+xid)
+                       x = min(varn+xoffset+xid),
+                       xend = max(varn+xoffset+xid)
                        )
       dfm <- ddply(dfm , .(id), transform,
         tangens = max(midy)-min(midx)
@@ -228,7 +228,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
                    y=c(midx[1], midy[1])[varn]
                    )
 
-      r <- geom_ribbon(aes(x=as.numeric(variable)+offset+xid,
+      r <- geom_ribbon(aes(x=as.numeric(variable)+xoffset+xid,
                            ymin=y-width, ymax=y+width, group=id,
                            fill=Nodeset, colour=Nodeset),  alpha=alpha, data=dfm) #, drop=FALSE)
     }
