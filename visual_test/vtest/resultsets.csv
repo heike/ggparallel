@@ -1,0 +1,12 @@
+"resultset_hash","context","desc","type","width","height","dpi","err","hash","order","expr","errmsg"
+"c50ffd6b85af77a09455ae39d6e789f2","ggparallel","Basic common angle plot with mtcars data","pdf",4,4,NA,"ok","5aabb97250023637b73d873db8f05c69",1,NA,NA
+"c50ffd6b85af77a09455ae39d6e789f2","ggparallel","Basic hammock plot with mtcars data","pdf",4,4,NA,"ok","a5d82085165caca58fccc177d6f2abbe",2,NA,NA
+"c50ffd6b85af77a09455ae39d6e789f2","ggparallel","Basic hammock plot with mtcars data with ColorBrewer colors","pdf",4,4,NA,"ok","308bb5a3fbe4060fa34b27b7e39c16fc",3,NA,NA
+"c50ffd6b85af77a09455ae39d6e789f2","ggparallel","Combination of common angle plot and hammock adjustment with ColorBrewer colors","pdf",4,4,NA,"ok","b3ab2b4f90939c049684cdbb4f5bf8f0",4,NA,NA
+"c50ffd6b85af77a09455ae39d6e789f2","ggparallel","Basic parallel set plot","pdf",4,4,NA,"ok","ffc4e94a59593352303b7d30bad3a99d",5,NA,NA
+"c50ffd6b85af77a09455ae39d6e789f2","ggparallel","Basic parallel set plot, flipped plot, rotated text","pdf",4,4,NA,"ok","475aa765d097ed2a4b58bb89352c59bf",6,NA,NA
+"c50ffd6b85af77a09455ae39d6e789f2","ggparallel","Basic parallel set plot, flipped plot, rotated text with ColorBrewer colors","pdf",4,4,NA,"ok","c588e6db46576a8bdd5bdd1e70603448",7,NA,NA
+"c50ffd6b85af77a09455ae39d6e789f2","ggparallel","Common Angle plot with Titanic data","pdf",4,4,NA,"ok","48189222789811fc0f038763a97b1532",8,NA,NA
+"c50ffd6b85af77a09455ae39d6e789f2","ggparallel","Hammock plot with Titanic data","pdf",4,4,NA,"ok","03361df79e2ffad2b9a51d47c9cf275a",9,NA,NA
+"c50ffd6b85af77a09455ae39d6e789f2","ggparallel","Hammock plot with Titanic data, line widths adjusted by frequency","pdf",4,4,NA,"ok","cab59d9a847ed17d35a898f059182a28",10,NA,NA
+"c50ffd6b85af77a09455ae39d6e789f2","ggparallel","Common angle plot with gene data","pdf",4,4,NA,"ok","31bf517469730c9bd3cc4c1016dc1ed7",11,NA,NA
