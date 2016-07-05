@@ -53,6 +53,7 @@
 #'  layer for additional modifications.
 #' @export
 #' @import ggplot2 plyr reshape2
+#' @example inst/examples/ggparallel-ex.R
 ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
                        alpha=0.5, width = 0.25, order = 1,  ratio=NULL,
                        asp = NULL, label = TRUE, label.size=4, text.angle=90,

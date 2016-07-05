@@ -16,3 +16,4 @@ Suggests:
     RColorBrewer
 URL: http://github.com/heike/ggparallel
 LazyData: true
+RoxygenNote: 5.0.1
