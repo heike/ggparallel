@@ -7,7 +7,7 @@
 ggparallel(vars = list(), data, weight = NULL, method = "angle",
   alpha = 0.5, width = 0.25, order = 1, ratio = NULL, asp = NULL,
   label = TRUE, label.size = 4, text.angle = 90, text.offset = NULL,
-  ...)
+  same.level = FALSE, ...)
 }
 \arguments{
 \item{vars}{list of variable names to be included in the plotting. Order of
@@ -46,6 +46,8 @@ the case of hammock plots.}
 rotated. Ignored if label = FALSE}
 
 \item{text.offset}{(vector) of values for offset the labels}
+
+\item{same.level}{are all variables using the same levels? If yes, simplify the labelling}
 
 \item{...}{passed on directly to all of the ggplot2 commands}
 }

@@ -1,8 +1,10 @@
 Package: ggparallel
 Version: 0.1.2
 Title: Variations of Parallel Coordinate Plots for Categorical Data
-Author: Heike Hofmann, Marie Vendettuoli
-Maintainer: Heike Hofmann <hofmann@iastate.edu>
+Authors@R: c(
+      person("Heike", "Hofmann", , "hofmann@iastate.edu",c("aut", "cre")),
+      person("Marie","Vendettuoli", role="aut")
+      )
 Description: Create hammock plots, parallel sets, and common angle plots
     with ggplot2.
 License: MIT + file LICENSE
@@ -15,5 +17,6 @@ Imports:
 Suggests:
     RColorBrewer
 URL: http://github.com/heike/ggparallel
+BugReports: https://github.com/heike/ggparallel/issues
 LazyData: true
 RoxygenNote: 5.0.1
