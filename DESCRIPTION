@@ -3,7 +3,7 @@ Version: 0.2.0
 Date: 2016-12-05
 Title: Variations of Parallel Coordinate Plots for Categorical Data
 Authors@R: c(
-      person("Heike", "Hofmann", , "hofmann@iastate.edu",c("aut", "cre")),
+      person("Heike", "Hofmann", , "hofmann@mail.iastate.edu",c("aut", "cre")),
       person("Marie","Vendettuoli", role="aut")
       )
 Description: Create hammock plots, parallel sets, and common angle plots
