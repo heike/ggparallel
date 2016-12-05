@@ -34,6 +34,7 @@ ggparallel(names(titanic)[c(1,4,2,1)], order=0, titanic, weight="Freq") +
   scale_fill_brewer(palette="Paired", guide="none") +
   scale_colour_brewer(palette="Paired", guide="none")
 
+\dontrun{
 cols <- c(brewer.pal(5,"Blues")[-1], brewer.pal(3, "Oranges")[-1],
           brewer.pal(3, "Greens")[-1])
 ggparallel(names(titanic)[c(1,4,2,1)], order=0, titanic, weight="Freq") +
@@ -53,7 +54,7 @@ ggparallel(names(titanic)[c(1,4,2,3)], titanic, weight="Freq",
            width=0.45) +
   theme( legend.position="none")
 
-\dontrun{
+
 ## biological examples: genes and pathways
 data(genes)
 cols <- c(rep("grey80", 24), brewer.pal("YlOrRd", n = 9))
