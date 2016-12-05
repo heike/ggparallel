@@ -10,3 +10,14 @@
 "c50ffd6b85af77a09455ae39d6e789f2","ggparallel","Hammock plot with Titanic data","pdf",4,4,NA,"ok","03361df79e2ffad2b9a51d47c9cf275a",9,NA,NA
 "c50ffd6b85af77a09455ae39d6e789f2","ggparallel","Hammock plot with Titanic data, line widths adjusted by frequency","pdf",4,4,NA,"ok","cab59d9a847ed17d35a898f059182a28",10,NA,NA
 "c50ffd6b85af77a09455ae39d6e789f2","ggparallel","Common angle plot with gene data","pdf",4,4,NA,"ok","31bf517469730c9bd3cc4c1016dc1ed7",11,NA,NA
+"d822e99627c87cc6a920305a4ee83f1a","ggparallel","Basic common angle plot with mtcars data","pdf",4,4,NA,"ok","3e3b9633a5c89df647ddc90baf5ff92a",1,NA,NA
+"d822e99627c87cc6a920305a4ee83f1a","ggparallel","Basic hammock plot with mtcars data","pdf",4,4,NA,"ok","bb10ffe1b05179959e6b5c78b78bd4a9",2,NA,NA
+"d822e99627c87cc6a920305a4ee83f1a","ggparallel","Basic hammock plot with mtcars data with ColorBrewer colors","pdf",4,4,NA,"ok","3286fe6ba73c9e74a5b330d5ac82b5cb",3,NA,NA
+"d822e99627c87cc6a920305a4ee83f1a","ggparallel","Combination of common angle plot and hammock adjustment with ColorBrewer colors","pdf",4,4,NA,"ok","117fc35a0a09c5514505c565a7e51131",4,NA,NA
+"d822e99627c87cc6a920305a4ee83f1a","ggparallel","Basic parallel set plot","pdf",4,4,NA,"ok","b71e7d2362ede2081d05fc72c34fcd31",5,NA,NA
+"d822e99627c87cc6a920305a4ee83f1a","ggparallel","Basic parallel set plot, flipped plot, rotated text","pdf",4,4,NA,"ok","d8ac04105812fa67244287346b0ff65f",6,NA,NA
+"d822e99627c87cc6a920305a4ee83f1a","ggparallel","Basic parallel set plot, flipped plot, rotated text with ColorBrewer colors","pdf",4,4,NA,"ok","8f89b0fcdff96a3aa60e5bf0e8647d8a",7,NA,NA
+"d822e99627c87cc6a920305a4ee83f1a","ggparallel","Common Angle plot with Titanic data","pdf",4,4,NA,"ok","5cb6d6da388be822b8077e103f8da941",8,NA,NA
+"d822e99627c87cc6a920305a4ee83f1a","ggparallel","Hammock plot with Titanic data","pdf",4,4,NA,"ok","b132913dff191f2d59fd531b1a426411",9,NA,NA
+"d822e99627c87cc6a920305a4ee83f1a","ggparallel","Hammock plot with Titanic data, line widths adjusted by frequency","pdf",4,4,NA,"ok","8cfe7cc76098e2b4ecf553c5bed21343",10,NA,NA
+"d822e99627c87cc6a920305a4ee83f1a","ggparallel","Common angle plot with gene data","pdf",4,4,NA,"ok","b75418842baac7035cf9b5c620825c12",11,NA,NA
