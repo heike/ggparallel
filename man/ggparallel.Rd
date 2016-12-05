@@ -83,10 +83,6 @@ display. We refer to this method as \code{adj.angle}.
 }
 \examples{
 data(mtcars)
-mtcars$cyl <- factor(mtcars$cyl, levels = c("8","6","4"))
-mtcars$gear <- factor(mtcars$gear)
-ggpar(list("gear", "cyl", "gear"), data=mtcars)
-ggpar(list("cyl", "gear", "cyl"), data=mtcars)
 
 ggparallel(list("gear", "cyl"), data=mtcars)
 ggparallel(list("gear", "cyl"), data=mtcars, method="hammock", ratio=0.25)
