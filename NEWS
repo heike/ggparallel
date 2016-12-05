@@ -13,3 +13,7 @@ Version 0.1.2
 ------------------------------------------------------------
 * removed the Rproj file from the package
 * added parameter label.size
+------------------------------------------------------------
+Version 0.2.0
+------------------------------------------------------------
+* adjusted order of categories to new ggplot2 filling order in barcharts

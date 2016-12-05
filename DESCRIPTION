@@ -1,5 +1,5 @@
 Package: ggparallel
-Version: 0.1.2
+Version: 0.2.0
 Title: Variations of Parallel Coordinate Plots for Categorical Data
 Authors@R: c(
       person("Heike", "Hofmann", , "hofmann@iastate.edu",c("aut", "cre")),
@@ -11,9 +11,9 @@ License: MIT + file LICENSE
 Depends:
     R (>= 2.10.0),
 Imports:
-    ggplot2 (>= 0.9.2),
-    reshape2,
-    plyr
+    ggplot2 (>= 2.2.0),
+    reshape2 (>= 1.4.2),
+    plyr (>= 1.8.4)
 Suggests:
     RColorBrewer
 URL: http://github.com/heike/ggparallel
