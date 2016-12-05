@@ -150,5 +150,16 @@ ggparallel(list("path", "chrom"), text.offset=c(0.03, 0,-0.03),
    scale_colour_manual(values = cols, guide="none") +
    coord_flip()
 }
+
+data(Titanic)
+titanic <- as.data.frame(Titanic)
+
+titanic$SexSurvived <- with(titanic, interaction(Sex, Survived))
+titanic$SexClassSurvived <- with(titanic, interaction(Sex,Class, Survived))
+
+ggparallel(vars=list("Survived", "SexSurvived", "SexClassSurvived"), weight="Freq", data=titanic) +
+  theme(legend.position="none") +
+  scale_fill_manual(values = rep(c("Orange", "Steelblue"), 14)) +
+  scale_colour_manual(values = rep(c("Orange", "Steelblue"), 14))
 }
 

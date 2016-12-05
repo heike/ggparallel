@@ -124,16 +124,18 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
     names(dfxy)[1:2] <- c(xname, yname)
 
     ## get the ordering for data according to x-axis categories
-    idx <- order(dfxy[,x], dfxy[,y], decreasing = FALSE)
+    idx <- order(dfxy[,x], dfxy[,y], decreasing = TRUE)
 
     ## find the position of X-axis connector
-    dfxy$X[idx] <- cumsum(dfxy$Freq[idx])
+    dfxy$X[idx] <- sum(dfxy$Freq[idx]) - cumsum(dfxy$Freq[idx])
+    dfxy$X[idx] <- dfxy$X[idx] + dfxy$Freq[idx]
 
     ## get the ordering for data according to y-axis categories
-    idx <- order(dfxy[,y], dfxy[,x], decreasing = FALSE)
+    idx <- order(dfxy[,y], dfxy[,x], decreasing = TRUE)
 
     ## find the position of the Y-axis connector
-    dfxy$Y[idx] <- cumsum(dfxy$Freq[idx])
+    dfxy$Y[idx] <- sum(dfxy$Freq[idx]) - cumsum(dfxy$Freq[idx])
+    dfxy$Y[idx] <- dfxy$Y[idx] + dfxy$Freq[idx]
 
     ## assign row number as id
     dfxy$id <- 1:nrow(dfxy)
@@ -151,7 +153,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
 
     if (method=="parset") {
       r <- geom_ribbon(aes(x=as.numeric(variable)+xoffset+xid,
-                           ymin=value -Freq,
+                           ymin=value-Freq,
                            ymax= value, group=id,
                       fill=Nodeset, colour=Nodeset),	alpha=alpha, data=dfm)
     }
@@ -236,7 +238,6 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
     }
     r
   }
-
   ## end helper function
 
   ## local variables
@@ -286,6 +287,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
   }
   theme.layer <- NULL
   if (!is.null(asp)) theme.layer <- theme(aspect.ratio=asp)
+  dfm$Nodeset <- factor(dfm$Nodeset, levels = rev(levels(dfm$Nodeset)))
   ggplot() + xlab("")  + gr + theme.layer +
     geom_bar(aes(weight=weight, x=variable, fill=Nodeset, colour=Nodeset),  width=width, data=dfm) +
             llabels +
