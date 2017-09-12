@@ -79,3 +79,17 @@ ggparallel(vars=list("Survived", "SexSurvived", "SexClassSurvived"), weight="Fre
   theme(legend.position="none") +
   scale_fill_manual(values = rep(c("Orange", "Steelblue"), 14)) +
   scale_colour_manual(values = rep(c("Orange", "Steelblue"), 14))
+
+###########
+
+p1 <- ggparallel(vars=list("Survived", "SexSurvived", "SexClassSurvived"), weight="Freq", data=titanic, label = FALSE) +
+  theme(legend.position="none") +
+  scale_fill_manual(values = rep(c("Orange", "Steelblue"), 14)) +
+  scale_colour_manual(values = rep(c("Orange", "Steelblue"), 14))
+p2 <- ggparallel(vars=list("Survived", "SexSurvived", "SexClassSurvived"), weight="Freq", data=titanic, label = TRUE) +
+  theme(legend.position="none") +
+  scale_fill_manual(values = rep(c("Orange", "Steelblue"), 14)) +
+  scale_colour_manual(values = rep(c("Orange", "Steelblue"), 14))
+
+ggplot_build(p2)$data[[4]]
+p1 + geom_text(aes(x = x, y=y, label = label), data = ggplot_build(p2)$data[[4]])

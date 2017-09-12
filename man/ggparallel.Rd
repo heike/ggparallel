@@ -6,8 +6,8 @@
 \usage{
 ggparallel(vars = list(), data, weight = NULL, method = "angle",
   alpha = 0.5, width = 0.25, order = 1, ratio = NULL, asp = NULL,
-  label = TRUE, label.size = 4, text.angle = 90, text.offset = NULL,
-  same.level = FALSE, ...)
+  label = TRUE, label.colour = "grey90", label.size = 4,
+  text.angle = 90, text.offset = NULL, same.level = FALSE, ...)
 }
 \arguments{
 \item{vars}{list of variable names to be included in the plotting. Order of
@@ -40,12 +40,13 @@ the case of hammock plots.}
 
 \item{label}{binary variable (vector), whether labels should be shown.}
 
+\item{label.colour}{character of colour in which the label should be shown. Ignored, if `label` is FALSE.}
+
 \item{label.size}{numeric value to determine the size in which labels are shown, defaults to 4}
 
-\item{text.angle}{numeric value in degrees, by which text for labelling is
-rotated. Ignored if label = FALSE}
+\item{text.angle}{numeric value to determine the angle under which labels are shown.}
 
-\item{text.offset}{(vector) of values for offset the labels}
+\item{text.offset}{(vector) of values for offsetting the labels}
 
 \item{same.level}{are all variables using the same levels? If yes, simplify the labelling}
 
@@ -163,5 +164,18 @@ ggparallel(vars=list("Survived", "SexSurvived", "SexClassSurvived"), weight="Fre
   theme(legend.position="none") +
   scale_fill_manual(values = rep(c("Orange", "Steelblue"), 14)) +
   scale_colour_manual(values = rep(c("Orange", "Steelblue"), 14))
-}
 
+###########
+
+p1 <- ggparallel(vars=list("Survived", "SexSurvived", "SexClassSurvived"), weight="Freq", data=titanic, label = FALSE) +
+  theme(legend.position="none") +
+  scale_fill_manual(values = rep(c("Orange", "Steelblue"), 14)) +
+  scale_colour_manual(values = rep(c("Orange", "Steelblue"), 14))
+p2 <- ggparallel(vars=list("Survived", "SexSurvived", "SexClassSurvived"), weight="Freq", data=titanic, label = TRUE) +
+  theme(legend.position="none") +
+  scale_fill_manual(values = rep(c("Orange", "Steelblue"), 14)) +
+  scale_colour_manual(values = rep(c("Orange", "Steelblue"), 14))
+
+ggplot_build(p2)$data[[4]]
+p1 + geom_text(aes(x = x, y=y, label = label), data = ggplot_build(p2)$data[[4]])
+}
