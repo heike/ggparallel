@@ -58,7 +58,7 @@
 #' @example inst/examples/ggparallel-ex.R
 ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
                        alpha=0.5, width = 0.25, order = 1,  ratio=NULL,
-                       asp = NULL, label = TRUE, label.colour="grey90", label.size=4, text.angle=90,
+                       asp = NULL, label = TRUE, label.type = "names", label.colour="grey90", label.size=4, text.angle=90,
                        text.offset=NULL, same.level=FALSE, ...) {
   ### error checking
   vars <- unlist(vars)
