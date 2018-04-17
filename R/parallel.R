@@ -42,6 +42,7 @@
 #'   displays) of the widest line as ratio of the overall display height (width
 #'   for horizontal displays).
 #' @param label binary variable (vector), whether labels should be shown.
+#' @param label.type which label type to display, either level names (label.type = "names") or level count (label.type = "count").
 #' @param label.size numeric value to determine the size in which labels are shown, defaults to 4
 #' @param label.colour character of colour in which the label should be shown. Ignored, if `label` is FALSE.
 #' @param text.angle numeric value to determine the angle under which labels are shown.
@@ -278,8 +279,14 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
     if (is.null(text.offset)) text.offset <- 0
   	label.stats$text.offset <- rep(text.offset, length=nrow(label.stats))
 
-	  varnames <- paste(unlist(vars), sep="|", collapse="|")
-	  label.stats$labels <- gsub(sprintf("(%s):(.*)",varnames),"\\2", as.character(label.stats$Nodeset))
+   if (label.type == "names") {
+       varnames <- paste(unlist(vars), sep="|", collapse="|")
+	     label.stats$labels <- gsub(sprintf("(%s):(.*)",varnames),"\\2", as.character(label.stats$Nodeset))
+       }
+    if (label.type == "count") {
+      label.stats$labels <- label.stats$weight
+      }
+	  
     llabels <- list(#geom_text(aes(x=as.numeric(variable)+text.offset, y=ypos, label=labels),
 	                  #    colour = "grey20", data=label.stats, angle=text.angle, size=label.size),
 	                  geom_text(aes(x=as.numeric(variable)+0.01+text.offset, y=ypos-0.01, label=labels),
