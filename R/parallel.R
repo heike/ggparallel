@@ -87,7 +87,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
   llist <- NULL
   for (i in unique(vars)) {
   	if (!same.level) levels(data[,i]) <- paste(i, levels(data[,i]), sep=":")
-    llist <- c(llist, levels(data[,i]))
+    llist <- unique(c(llist, levels(data[,i])))
   }
   if ((method=="hammock"))# | (method=="adj.angle"))
     if (is.null(asp)) asp <- 1
