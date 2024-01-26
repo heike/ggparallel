@@ -1,0 +1,63 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# ggparallel
+
+<!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/ggparallel)](https://CRAN.R-project.org/package=ggparallel)
+[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/ggparallel?color=blue)](https://r-pkg.org/pkg/ggparallel)
+[![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)](https://github.com/heike/x3ptools/commits/main)
+[![Codecov test coverage](https://codecov.io/gh/heike/ggparallel/branch/master/graph/badge.svg)](https://app.codecov.io/gh/heike/ggparallel?branch=master)
+[![R-CMD-check](https://github.com/heike/ggparallel/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/heike/ggparallel/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
+
+The R package `ggparallel` implements and combines different types of parallel coordinate plots for categorical data: [hammock plots](http://www.schonlau.net/publication/03jsm_hammockplot_old.pdf), [parallel sets plots](https://datavizcatalogue.com/methods/parallel_sets.html), and [common angle plots](https://ieeexplore.ieee.org/document/6634157), as well as common angle plots with a hammock-like adjustment for line widths.
+
+## Installation
+
+The package is available on CRAN:
+
+```
+install.packages("ggparallel")
+```
+
+You can install the development version of ggparallel from [GitHub](https://github.com/) with:
+
+```
+# install.packages("remotes")
+remotes::install_github("heike/ggparallel")
+```
+
+## Basic use case
+
+
+
+```{r}
+library(ggparallel)
+data(mtcars)
+
+ggparallel(list("gear", "cyl"), data=mtcars)
+```
+
+
+```{r}
+ggparallel(list("gear", "cyl"), data=mtcars, method="hammock", ratio=0.25)
+```
+
+
+
+
+
