@@ -5,3 +5,6 @@
 ^README.*$
 ^visual_test$
 ^\.travis\.yml$
+^README\.Rmd$
+^codecov\.yml$
+^\.github$
