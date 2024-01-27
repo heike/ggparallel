@@ -20,4 +20,5 @@ Suggests:
 URL: http://github.com/heike/ggparallel
 BugReports: https://github.com/heike/ggparallel/issues
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 7.2.3
+Encoding: UTF-8
