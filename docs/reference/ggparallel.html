@@ -20,13 +20,16 @@ for line widths."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggparallel</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/heike/ggparallel/" class="external-link">
@@ -44,7 +47,7 @@ for line widths."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Variations of parallel coordinate plots</h1>
-    <small class="dont-index">Source: <a href="https://github.com/heike/ggparallel/blob/HEAD/R/parallel.R" class="external-link"><code>R/parallel.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/heike/ggparallel/blob/HEAD/R/ggparallel.R" class="external-link"><code>R/ggparallel.R</code></a></small>
     <div class="hidden name"><code>ggparallel.Rd</code></div>
     </div>
 
@@ -56,10 +59,24 @@ for line widths.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggparallel</span><span class="op">(</span>vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">data</span>, weight <span class="op">=</span> <span class="cn">NULL</span>, method <span class="op">=</span> <span class="st">"angle"</span>,</span>
-<span>  alpha <span class="op">=</span> <span class="fl">0.5</span>, width <span class="op">=</span> <span class="fl">0.25</span>, order <span class="op">=</span> <span class="fl">1</span>, ratio <span class="op">=</span> <span class="cn">NULL</span>, asp <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  label <span class="op">=</span> <span class="cn">TRUE</span>, label.colour <span class="op">=</span> <span class="st">"grey90"</span>, label.size <span class="op">=</span> <span class="fl">4</span>,</span>
-<span>  text.angle <span class="op">=</span> <span class="fl">90</span>, text.offset <span class="op">=</span> <span class="cn">NULL</span>, same.level <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ggparallel</span><span class="op">(</span></span>
+<span>  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  <span class="va">data</span>,</span>
+<span>  weight <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"angle"</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  width <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  order <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  ratio <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  asp <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  label.colour <span class="op">=</span> <span class="st">"grey90"</span>,</span>
+<span>  label.size <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  text.angle <span class="op">=</span> <span class="fl">90</span>,</span>
+<span>  text.offset <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  same.level <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -262,11 +279,13 @@ display. We refer to this method as <code>adj.angle</code>.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">###########</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">ggparallel</span><span class="op">(</span>vars<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Survived"</span>, <span class="st">"SexSurvived"</span>, <span class="st">"SexClassSurvived"</span><span class="op">)</span>, weight<span class="op">=</span><span class="st">"Freq"</span>, data<span class="op">=</span><span class="va">titanic</span>, label <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">ggparallel</span><span class="op">(</span>vars<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Survived"</span>, <span class="st">"SexSurvived"</span>, <span class="st">"SexClassSurvived"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                 weight<span class="op">=</span><span class="st">"Freq"</span>, data<span class="op">=</span><span class="va">titanic</span>, label <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Orange"</span>, <span class="st">"Steelblue"</span><span class="op">)</span>, <span class="fl">14</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Orange"</span>, <span class="st">"Steelblue"</span><span class="op">)</span>, <span class="fl">14</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">ggparallel</span><span class="op">(</span>vars<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Survived"</span>, <span class="st">"SexSurvived"</span>, <span class="st">"SexClassSurvived"</span><span class="op">)</span>, weight<span class="op">=</span><span class="st">"Freq"</span>, data<span class="op">=</span><span class="va">titanic</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">ggparallel</span><span class="op">(</span>vars<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Survived"</span>, <span class="st">"SexSurvived"</span>, <span class="st">"SexClassSurvived"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                 weight<span class="op">=</span><span class="st">"Freq"</span>, data<span class="op">=</span><span class="va">titanic</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Orange"</span>, <span class="st">"Steelblue"</span><span class="op">)</span>, <span class="fl">14</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Orange"</span>, <span class="st">"Steelblue"</span><span class="op">)</span>, <span class="fl">14</span><span class="op">)</span><span class="op">)</span></span></span>
