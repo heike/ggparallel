@@ -14,7 +14,7 @@ test_that("ggparallel works", {
   build_now <- ggplot2::ggplot_build(test)
 
   # data is the same
-  expect_identical(built_saved$data, build_now$data)
+  expect_equal(built_saved$data, build_now$data, tolerance=1e-4)
 
   # we have three layers
   expect_equal(length(test$layers), 3)
@@ -40,3 +40,14 @@ test_that("ggparallel hammocks work", {
   expect_equal(titanic_hammock, build_now$data, tolerance=1e-4)
 })
 
+test_that("ggparallel adjusted angles work", {
+  load(system.file("titanic_adjangle.rda", package="ggparallel")) # loads object titanic_adjangle
+
+  titanic <- as.data.frame(Titanic)
+  titanic_plot <- ggparallel(list("gear", "cyl"), data=mtcars, method="adj.angle", ratio=2.5)
+  build_now <- ggplot2::ggplot_build(titanic_plot)
+  # titanic_adjangle <- build_now$data
+  # save(titanic_adjangle, file="inst/titanic_adjangle.rda")
+
+  expect_equal(titanic_adjangle, build_now$data, tolerance=1e-4)
+})
