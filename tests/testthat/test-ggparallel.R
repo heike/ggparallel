@@ -4,6 +4,14 @@ test_that("ggparallel works", {
   test <- ggparallel(list("gear", "cyl"), data=mtcars)
   build_now <- ggplot2::ggplot_build(test)
 
+  # data is the same
   expect_identical(built_saved$data, build_now$data)
-#  expect_identical(test$layers, test_mtcars_plot$layers)
+
+  # we have three layers
+  expect_equal(length(test$layers), 3)
+  classes <-
+    c(class(test$layers[[1]]$geom), class(test$layers[[2]]$geom), class(test$layers[[3]]$geom))
+  # we have the right layer classes
+  expect_contains(classes, c("GeomRibbon", "GeomBar", "GeomText"))
+
 })
