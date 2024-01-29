@@ -1,6 +1,6 @@
 Package: ggparallel
 Version: 0.3.0
-Date: 2024-01-26
+Date: 2024-01-29
 Title: Variations of Parallel Coordinate Plots for Categorical Data
 Authors@R: c(
       person("Heike", "Hofmann", , "hofmann@mail.iastate.edu",c("aut", "cre")),
@@ -10,7 +10,7 @@ Description: Create hammock plots, parallel sets, and common angle plots
     with 'ggplot2'.
 License: MIT + file LICENSE
 Depends:
-    R (>= 2.10.0),
+    R (>= 3.5.0),
     ggplot2 (>= 2.2.0)
 Imports:
     reshape2 (>= 1.4.2),
