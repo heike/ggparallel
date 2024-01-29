@@ -16,9 +16,11 @@ Imports:
     reshape2 (>= 1.4.2),
     plyr (>= 1.8.4)
 Suggests:
-    RColorBrewer
+    RColorBrewer,
+    testthat (>= 3.0.0)
 URL: http://github.com/heike/ggparallel
 BugReports: https://github.com/heike/ggparallel/issues
 LazyData: true
 RoxygenNote: 7.2.3
 Encoding: UTF-8
+Config/testthat/edition: 3
