@@ -4,6 +4,7 @@
 ^README\.md$
 ^README.*$
 ^visual_test$
+^visual_test_outdated$
 ^\.travis\.yml$
 ^README\.Rmd$
 ^codecov\.yml$
