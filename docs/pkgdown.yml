@@ -2,5 +2,8 @@ pandoc: 3.1.6.1
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-01-29T15:38Z
+last_built: 2024-01-29T16:22Z
+urls:
+  reference: https://heike.github.io/ggparallel/reference
+  article: https://heike.github.io/ggparallel/articles
 
