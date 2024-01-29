@@ -25,9 +25,8 @@ test_that("ggparallel works", {
 
   # throw error
   expect_message(expect_error(ggparallel(list("gear"), data=mtcars)))
-})
 
-test_that("ggparallel hammocks work", {
+  # hammock plots
   load(system.file("titanic_hammock.rda", package="ggparallel")) # loads object titanic_hammock
 
   titanic <- as.data.frame(Titanic)
@@ -38,9 +37,8 @@ test_that("ggparallel hammocks work", {
   # save(titanic_hammock, file="inst/titanic_hammock.rda")
 
   expect_equal(titanic_hammock, build_now$data, tolerance=1e-4)
-})
 
-test_that("ggparallel adjusted angles work", {
+  # adjusted angle
   load(system.file("titanic_adjangle.rda", package="ggparallel")) # loads object titanic_adjangle
 
   titanic <- as.data.frame(Titanic)
