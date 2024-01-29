@@ -1,15 +1,11 @@
-citHeader("To cite ggparallel in publications, please use:")
-
-citEntry(entry = "article",
-  author = "Heike Hofmann and Marie Vendettuoli",
-journal="IEEE Transactions on Visualization and Computer Graphics",
-title="Common Angle Plots as Perception-True Visualizations of Categorical Associations", 
-year="2013", 
-volume="19", 
-number="12", 
-pages="2297--2305", 
-doi="10.1109/TVCG.2013.140", 
-ISSN="1077-2626", 
-  textVersion = "H. Hofmann and M. Vendettuoli, Common Angle Plots as Perception-True Visualizations of Categorical Associations, in IEEE Transactions on Visualization and Computer Graphics, vol. 19, no. 12, pp. 2297-2305, Dec. 2013.
-doi: 10.1109/TVCG.2013.140"
+bibentry(
+  bibtype  = "Article",
+  title    = "Common Angle Plots as Perception-True Visualizations of Categorical Associations",
+  author   = "Heike Hofmann and Marie Vendettuoli",
+  journal  = "IEEE Transactions on Visualization & Computer Graphics",
+  year     = "2013",
+  volume   = "",
+  number   = "12",
+  pages    = "2297--2305",
+  doi      = "10.1109/TVCG.2013.140"
 )

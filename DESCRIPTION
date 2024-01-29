@@ -18,8 +18,8 @@ Imports:
 Suggests:
     RColorBrewer,
     testthat (>= 3.0.0)
-URL: http://github.com/heike/ggparallel, https://heike.github.io/ggparallel/
-BugReports: https://github.com/heike/ggparallel/issues
+URL: https://github.com/heike/ggparallel/, https://heike.github.io/ggparallel/
+BugReports: https://github.com/heike/ggparallel/issues/
 LazyData: true
 RoxygenNote: 7.2.3
 Encoding: UTF-8
