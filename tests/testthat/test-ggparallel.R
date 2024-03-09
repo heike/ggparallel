@@ -12,6 +12,8 @@ test_that("ggparallel works", {
   built_saved <- ggplot2::ggplot_build(test_mtcars_plot)
   test <- ggparallel(list("gear", "cyl"), data=mtcars)
   build_now <- ggplot2::ggplot_build(test)
+  # test_mtcars_plot <- test
+  # save(test_mtcars_plot, file="inst/mtcars.rda")
 
   # data is the same
   expect_equal(built_saved$data, build_now$data, tolerance=1e-4)
