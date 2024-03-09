@@ -1,6 +1,6 @@
 Package: ggparallel
-Version: 0.3.0
-Date: 2024-01-29
+Version: 0.4.0
+Date: 2024-03-09
 Title: Variations of Parallel Coordinate Plots for Categorical Data
 Authors@R: c(
       person("Heike", "Hofmann", , "hofmann@mail.iastate.edu",c("aut", "cre"),
