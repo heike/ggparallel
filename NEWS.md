@@ -1,6 +1,6 @@
 # ggparallel 0.4.0
 
-- Required change to aesthetics.
+- Fix to test data.
 
 # ggparallel 0.3.0
 

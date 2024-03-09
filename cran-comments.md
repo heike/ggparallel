@@ -1,6 +1,6 @@
 ## Test environments
-* local OS X install, R 4.3.1
-* ubuntu 22.04 (on Github actions), R 4.3.1
+* local OS X install, R 4.3.2
+* ubuntu 22.04 (on Github actions), R 4.3.2
 * win-builder (devel and release)
 
 ## R CMD check results
