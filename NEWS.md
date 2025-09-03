@@ -1,3 +1,6 @@
+# ggparallel 0.5.0
+
+
 # ggparallel 0.4.0
 
 - Fix to test data.
