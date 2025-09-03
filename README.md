@@ -9,7 +9,7 @@
 status](https://www.r-pkg.org/badges/version/ggparallel)](https://CRAN.R-project.org/package=ggparallel)
 [![CRAN RStudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/last-month/ggparallel?color=blue)](https://r-pkg.org/pkg/ggparallel)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2024--01--29-yellowgreen.svg)](https://github.com/heike/ggparallel/commits/main)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2025--09--03-yellowgreen.svg)](https://github.com/heike/ggparallel/commits/main)
 [![codecov test
 coverage](https://codecov.io/gh/heike/ggparallel/graph/badge.svg?token=zfeqffIjxY)](https://codecov.io/gh/heike/ggparallel)
 [![R-CMD-check](https://github.com/heike/ggparallel/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/heike/ggparallel/actions/workflows/R-CMD-check.yaml)
