@@ -12,7 +12,7 @@ Description: Create hammock plots, parallel sets, and common angle plots
 License: MIT + file LICENSE
 Depends:
     R (>= 3.5.0),
-    ggplot2 (>= 3.5.9000)
+    ggplot2 (>= 3.5.2.9000)
 Imports:
     reshape2 (>= 1.4.4),
     plyr (>= 1.8.9)
