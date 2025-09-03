@@ -4,6 +4,6 @@
 #' parallel coordinate plots for categorical data: hammock plots, parallel
 #' sets plots, and common angle plots.
 #'
-#' @docType package
+#' @docType _PACKAGE
 #' @name package-ggparallel
 NULL
