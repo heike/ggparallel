@@ -276,7 +276,6 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
 	  maxWeight <- sum(label.stats$weight)/length(unique(label.stats$variable))
 	  label.stats$ypos <- cumsum(label.stats$weight)-(as.numeric(label.stats$variable)-1)*maxWeight
 	  label.stats$ypos <- label.stats$ypos-label.stats$weight/2
-
     if (is.null(text.offset)) text.offset <- 0
   	label.stats$text.offset <- rep(text.offset, length=nrow(label.stats))
 
@@ -290,7 +289,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
   theme.layer <- NULL
   if (!is.null(asp)) theme.layer <- theme(aspect.ratio=asp)
   dfm$Nodeset <- factor(dfm$Nodeset, levels = rev(levels(dfm$Nodeset)))
-  ggplot() + xlab("")  + gr + theme.layer +
+  ggplot() + xlab("")  + ylab("Freq") + gr + theme.layer +
     geom_bar(aes(weight=weight, x=variable, fill=Nodeset, colour=Nodeset),  width=width, data=dfm) +
             llabels +
              scale_x_discrete(expand=c(0.1, 0.1))
