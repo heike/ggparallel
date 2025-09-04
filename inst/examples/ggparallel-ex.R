@@ -93,5 +93,5 @@ p2 <- ggparallel(vars=list("Survived", "SexSurvived", "SexClassSurvived"),
   scale_fill_manual(values = rep(c("Orange", "Steelblue"), 14)) +
   scale_colour_manual(values = rep(c("Orange", "Steelblue"), 14))
 
-ggplot_build(p2)$data[[4]]
-p1 + geom_text(aes(x = x, y=y, label = label), data = ggplot_build(p2)$data[[4]])
+ggp2 <- ggplot_build(p2)@data
+p1 + geom_text(aes(x = x, y=y, label = label), data = ggp2[[2]])
