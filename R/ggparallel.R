@@ -203,6 +203,7 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
 #      plot.asp <- length(vars)/(1.1*sum(data$weight))*asp
 #      qplot(x, ymid, data=dfm, geom=c("line"), alpha=I(0.5), group=id, colour=factor(gear), size=Freq)+scale_size(range=4.2*c(min(dfm$Freq),max(dfm$Freq))) + scale_colour_discrete() + theme(legend.position="none") + ylim(c(0, 1.05*sum(data$weight)))
 #browser()
+      dfm$Nodeset = factor(dfm$Nodeset, levels = rev(llist))
       r <- list(geom_line(
         aes(x=x,y=ymid, group=id, colour=Nodeset, linewidth=Freq),
         alpha=alpha, data=dfm), range=c(min(dfm$Freq),max(dfm$Freq)))
@@ -288,11 +289,13 @@ ggparallel <- function(vars=list(), data, weight=NULL, method="angle",
   }
   theme.layer <- NULL
   if (!is.null(asp)) theme.layer <- theme(aspect.ratio=asp)
-  dfm$Nodeset <- factor(dfm$Nodeset, levels = rev(levels(dfm$Nodeset)))
-  ggplot() + xlab("")  + ylab("Freq") + gr + theme.layer +
+  dfm$Nodeset <- factor(dfm$Nodeset, levels = rev(llist))
+  ggplot() + xlab("")  + ylab("Freq")  + theme.layer +
     geom_bar(aes(weight=weight, x=variable, fill=Nodeset, colour=Nodeset),  width=width, data=dfm) +
             llabels +
-             scale_x_discrete(expand=c(0.1, 0.1))
+             scale_x_discrete(expand=c(0.1, 0.1)) + gr +
+    scale_fill_discrete(direction=-1) +
+    scale_colour_discrete(direction=-1)
   # theme(drop=FALSE)
 }
 
